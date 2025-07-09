@@ -1,0 +1,19 @@
+.treatment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 2rem;
+}
+.treatment-card {
+  background: #e7f1f5;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #ccc;
+}
+.treatment-card h3 {
+  margin: 0 0 0.5rem;
+}
+.treatment-card a {
+  color: #0077cc;
+  font-weight: bold;
+}

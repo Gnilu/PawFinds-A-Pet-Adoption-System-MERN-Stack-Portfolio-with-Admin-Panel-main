@@ -1,0 +1,68 @@
+
+ .home-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-orange {
+  background-color: #f4a261;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.services,
+.news-section,
+.testimonials {
+  display: block;
+}
+
+.services h2,
+.news-section h2,
+.testimonials h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.service-cards,
+.news-cards,
+.testimonial-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.service-card,
+.news-card,
+.testimonial-card {
+  background-color: #f0f4f8;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 220px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.image-card img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-card.highlight {
+  background-color: #dbeafe;
+  font-style: italic;
+}
