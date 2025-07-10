@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,6 +13,8 @@ const Register = () => {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChanges = (e) => {
     const { id, value } = e.target;
@@ -44,7 +48,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/auth/register",
+        "http://localhost:5000/api/auth/register",
         {
           username: formData.username,
           email: formData.email,
@@ -91,28 +95,46 @@ const Register = () => {
           />
           {errors.email && <div style={styles.errorText}>{errors.email}</div>}
 
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={handleChanges}
-            placeholder="Password"
-            style={styles.input}
-            required
-          />
+          <div style={styles.passwordWrapper}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              value={formData.password}
+              onChange={handleChanges}
+              placeholder="Password"
+              style={styles.input}
+              required
+            />
+            <button
+              type="button"
+              style={styles.eyeButton}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+            </button>
+          </div>
           {errors.password && (
             <div style={styles.errorText}>{errors.password}</div>
           )}
 
-          <input
-            type="password"
-            id="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChanges}
-            placeholder="Confirm Password"
-            style={styles.input}
-            required
-          />
+          <div style={styles.passwordWrapper}>
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChanges}
+              placeholder="Confirm Password"
+              style={styles.input}
+              required
+            />
+            <button
+              type="button"
+              style={styles.eyeButton}
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              <FontAwesomeIcon icon={showConfirmPassword ? faEye : faEyeSlash} />
+            </button>
+          </div>
           {errors.confirmPassword && (
             <div style={styles.errorText}>{errors.confirmPassword}</div>
           )}
@@ -186,6 +208,20 @@ const styles = {
   errorText: {
     color: "red",
     fontSize: "12px",
+  },
+  passwordWrapper: {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+  },
+  eyeButton: {
+    position: "absolute",
+    right: "10px",
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "12px",
+    
   },
 };
 
