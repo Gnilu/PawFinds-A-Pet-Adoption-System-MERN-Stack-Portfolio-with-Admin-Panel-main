@@ -13,6 +13,7 @@ import "./App.css";
 import Appoinment from "./Components/Appoinment/Appointment";
 import TreatmentList from "./Components/Treatment/TreatmentList";
 import CartPage from "./Components/Cart/Cart";
+import UserAccount from "./Components/Accounts/UserAccount"
 
 const Layout = ({ children }) => (
   <>
@@ -94,6 +95,15 @@ const App = () => {
           path="/admin" 
           element={<AdminPanel />} 
         />
+
+        <Route 
+  path="/user-account" 
+  element={
+    <Layout>
+      <UserAccount />
+    </Layout>
+  }
+/>
       </Routes>
     </Router>
   );
