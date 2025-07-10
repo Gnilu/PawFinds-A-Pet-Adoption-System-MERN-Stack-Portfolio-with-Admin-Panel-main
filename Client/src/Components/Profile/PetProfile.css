@@ -1,0 +1,21 @@
+/*  src/PetProfilePage.css */
+.pet-profile {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+.pet-details input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+}
+.records {
+  margin-top: 2rem;
+}
+.record-list {
+  background: #f9f9f9;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+}

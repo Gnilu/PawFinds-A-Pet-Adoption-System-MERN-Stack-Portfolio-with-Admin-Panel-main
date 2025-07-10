@@ -15,6 +15,7 @@ import TreatmentList from "./Components/Treatment/TreatmentList";
 import CartPage from "./Components/Cart/Cart";
 import Login from "./Components/UserLogin/Login";
 import UserAccount from "./Components/Accounts/UserAccount";
+import UserProfilePage from "./Components/Profile/UserProfile";
 
 const Layout = ({ children }) => (
   <>
@@ -105,6 +106,14 @@ const App = () => {
         element={
           <Layout>
             <UserAccount/>
+          </Layout>
+        }
+        />
+        <Route 
+        path="/user-profile"
+        element={
+          <Layout>
+            <UserProfilePage/>
           </Layout>
         }
         />

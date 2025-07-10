@@ -16,7 +16,7 @@
 
 .btn-treatment, 
 .btn-shop {
-  background-color:  #A8DADC;
+  background-color:  #f4a261;
   border: none;
   padding: 10px 20px;
   color: white;
@@ -104,7 +104,7 @@
 }
 
 .news-section {
-  margin: 50px 20px;
+  margin: 50px 20px 0 20px;
 }
 
 .news-section h2,
@@ -159,20 +159,18 @@
 }
 
 .testimonial-card {
-  background-color: #f0f4f8;
-  padding: 1rem;
+  background-color: #457B9D;
+  padding: 2rem 1rem;
   border-radius: 10px;
-  width: 220px;
+  width: 250px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-.image-card img {
-  max-width: 100%;
-  border-radius: 5px;
-  margin-bottom: 0.5rem;
+  color: white;
+  justify-content: center;
 }
 
 .testimonial-card.highlight {
-  background-color: #dbeafe;
-  font-style: italic;
+  background-color: white;
+  border: #457B9D solid 1px;
+  color: black;
+
 }

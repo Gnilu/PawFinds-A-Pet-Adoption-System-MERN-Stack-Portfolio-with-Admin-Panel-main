@@ -1,0 +1,31 @@
+/* // src/UserProfilePage.css */
+.user-profile {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+.user-details input, .pet-form input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+}
+.pet-cards {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.pet-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 120px;
+}
+.pet-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
