@@ -13,6 +13,8 @@ import "./App.css";
 import Appointment from "./Components/Appointment/Appointment";
 import TreatmentList from "./Components/Treatment/TreatmentList";
 import CartPage from "./Components/Cart/Cart";
+import Login from "./Components/UserLogin/Login";
+
 
 const Layout = ({ children }) => (
   <>
@@ -90,6 +92,15 @@ const App = () => {
           </Layout>
         }
         />
+         <Route 
+        path="/login"
+        element={
+          <Layout>
+            <Login/>
+          </Layout>
+        }
+        />
+        
         <Route 
           path="/admin" 
           element={<AdminPanel />} 

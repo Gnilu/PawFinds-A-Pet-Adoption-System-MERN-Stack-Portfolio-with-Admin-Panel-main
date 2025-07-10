@@ -39,7 +39,10 @@ const Navbar = (props) => {
         <Link to="/cart">
          <img className="cart" src={cart} alt="cart" />
         </Link>
+        <Link to="/login">
          <img className="user" src={user} alt="user" />
+        </Link>
+        
       </div>
     </div>
   );
