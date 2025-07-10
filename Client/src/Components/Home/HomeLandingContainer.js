@@ -25,7 +25,7 @@ const HomeLandingContainer = (props) => {
           </p>
         </div>
         <div className="adopt-btn">
-          <Link to='./pets'><button className="Home-button" onClick={scrollToTop}><p>Make an Appointment</p><img src={footPrint} alt="footprint" /></button></Link>
+          <Link to='./appointment'><button className="Home-button" onClick={scrollToTop}><p>Make an Appointment</p><img src={footPrint} alt="footprint" /></button></Link>
         </div>
       </div>
       <div className="homeContainer-right">

@@ -10,7 +10,7 @@ import AdoptForm from "./Components/AdoptForm/AdoptForm";
 // import AdminLogin from "./Components/AdminPanel/AdminLogin";
 import AdminPanel from "./Components/AdminPanel/AdminPanel";
 import "./App.css";
-import Appoinment from "./Components/Appoinment/Appointment";
+import Appointment from "./Components/Appointment/Appointment";
 import TreatmentList from "./Components/Treatment/TreatmentList";
 import CartPage from "./Components/Cart/Cart";
 
@@ -67,10 +67,10 @@ const App = () => {
           } 
         />
          <Route 
-          path="/appoinment" 
+          path="/appointment" 
           element={
             <Layout>
-              <Appoinment />
+              <Appointment />
             </Layout>
           } 
         />

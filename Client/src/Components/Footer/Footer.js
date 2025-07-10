@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "./images/logo.png";
-
+import './Footer.css';
 
 const Footer = (props) => {
   return (
@@ -15,14 +15,17 @@ const Footer = (props) => {
         <div>
           <p>You can reach me at{" "}</p>
           <div>
-            
+            <i class="fa fa-envelope"></i>{" "}            
             <a className="mail-links" href="mailto:petcare@gmail.com">
             petcare@gmail.com
-          </a>
+          </a>          
+          </div>      
+          <div>
+            <i class="fa fa-phone"></i>{" "}
+            <a class="mail-links" href="tel:+923019583959">
+          +92 301 9583959
+        </a>
           </div>
-          
-
-          
         </div>
         <p>
         

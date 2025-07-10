@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-:root {
+/* :root {
     --orange: #fea034;
     --hoverorange: #ff9317;
     --Lightorange: rgb(231, 158, 75);
@@ -12,6 +12,13 @@
     --black: black;
     --textGrey: rgb(237, 233, 233);
     --darkGrey: #1F2130;
+} */
+
+:root {
+    --main: #A8DADC;           /* Main color (e.g., background, sections) */
+    --button: #F4A261;         /* Button color */
+    --button-hover: #e78a3c;   /* Optional: darker hover shade for button */
+    --font-color: #000000;     /* Font color: black */
 }
 
 .navbar-container {
@@ -25,7 +32,8 @@
 
 .navbar-logo {
     margin-left: 10px;
-    width: 54px;
+    width: 100px;
+    height: auto;
 }
 
 .logo-container {
@@ -34,12 +42,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.logo-container>p {
-    font-family: 'Oxygen', sans-serif;
-    margin-left: 10px;
-    font-size: 29px;
 }
 
 .navbar-links li {
@@ -59,8 +61,8 @@
 }
 
 .navbar-links li>*:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
+    border: 2px var(--button-hover) solid;
+    background-color: var(--button);
     color: var(--white);
     box-shadow: 1.5px 1.5px 3px var(--hoverorange);
 }
@@ -133,7 +135,7 @@
     align-items: center;
     border: 2px var(--orange) solid;
     height: 42px;
-    width: 145px;
+    width: auto;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
@@ -144,8 +146,8 @@
 }
 
 .Home-button:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
+    border: 2px var(--button) solid;
+    background-color: var(--button-hover);
     color: var(--white);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -350,8 +352,9 @@
 }
 
 .navbar-logo {
-    margin-left: 10px;
-    width: 54px;
+    margin-left: -10px;
+    width: 200px;
+    height: auto;
 }
 
 .logo-container {
@@ -486,29 +489,28 @@
 }
 
 .adopt-btn>* {
-    text-decoration: none;
+    color: #000000;
 }
 
 .Home-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px var(--orange) solid;
+    border: 2px var(--main) solid;
     height: 42px;
-    width: 145px;
+    width: auto;
     font-weight: bold;
     font-size: 15px;
     border-radius: 20px;
-    background-color: var(--orange);
+    background-color: white;
     color: var(--white);
-    box-shadow: 1.5px 1.5px 3px var(--orange);
     font-family: 'Preahvihear', sans-serif;
+    padding: 10px;
 }
 
 .Home-button:hover {
-    border: 2px var(--hoverorange) solid;
-    background-color: var(--hoverorange);
-    color: var(--white);
+    border: 2px var(--button-hover) solid;
+    background-color: var(--button);
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -1120,101 +1122,6 @@ body {
 .custom-m-b {
     margin-bottom: 20px;
 }
-
-.email-not-valid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.email-not-valid p {
-    font-family: "Varela Round", sans-serif;
-    color: rgb(231, 58, 58);
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-
-.contactUs-main-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px 50px;
-}
-
-.contactUs-left-para {
-    width: 55vw;
-    padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Roboto", sans-serif;
-    font-family: "Varela Round", sans-serif;
-}
-
-.contactUs-left-para h3 {
-    font-size: 40px;
-    color: var(--darkGrey);
-}
-
-.contactUs-left-para i {
-    margin: 30px 0 20px 0;
-    font-size: 48px;
-    color: var(--darkGrey);
-}
-
-.contactUs-pic img {
-    height: 90vh;
-    margin-top: 15px;
-    margin-right: 150px;
-}
-
-.contactUs-pic img:hover {
-    animation: bounce 1s ease infinite;
-}
-
-.footer {
-    background-color: var(--textGrey);
-    color: var(--black);
-    padding-top: 20px;
-}
-
-.footer-content {
-    text-align: center;
-}
-
-.mail-links {
-    color: var(--black);
-    text-decoration: none;
-}
-
-.mail-links:hover {
-    text-decoration: underline;
-}
-
-.contact-links {
-    color: var(--black);
-    text-decoration: none;
-    padding: 5px;
-}
-
-.contact-links:hover {
-    background-color: var(--orange);
-    color: var(--white);
-    text-shadow: 2px 2px 2px var(--orange);
-    text-decoration: none;
-    border-radius: 20px;
-}
-
-.below-footer {
-    background-color: var(--textGrey);
-    color: var(--black);
-    padding: 10px;
-    text-align: center;
-    line-height: 1.6;
-}
-
 
 .navbar {
     display: flex;
