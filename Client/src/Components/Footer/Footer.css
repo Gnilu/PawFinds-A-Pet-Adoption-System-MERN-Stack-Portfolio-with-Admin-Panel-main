@@ -1,7 +1,9 @@
 .footer {
-    background-color: var(--textGrey);
+    background-color: rgb(168, 218, 220);
     color: var(--black);
     padding-top: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius:  20px;
 }
 
 .footer-content {
