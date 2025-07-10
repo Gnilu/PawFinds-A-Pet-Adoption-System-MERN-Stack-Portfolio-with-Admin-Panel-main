@@ -34,7 +34,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(
-                'https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/auth/login',
+                'http://localhost:5000/api/auth/login',
                 formData
             );
             if (response.status === 200) {
@@ -97,8 +97,8 @@ const Login = () => {
 
                     <p style={styles.signupText}>
                         Not a member?{' '}
-                        <Link to="/registration" style={styles.signupLink}>
-                            Signup
+                        <Link to="/user-account" style={styles.signupLink}>
+                            Create Account
                         </Link>
                     </p>
                 </form>
