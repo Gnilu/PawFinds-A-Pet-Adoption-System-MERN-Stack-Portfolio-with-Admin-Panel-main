@@ -8,6 +8,9 @@ const path = require('path');
 const petRouter = require('./Routes/PetRoute');
 const AdoptFormRoute = require('./Routes/AdoptFormRoute');
 const AdminRoute = require('./Routes/AdminRoute');
+const CartRoute = require('./Routes/cartRoute'); 
+const TreatmentRoute = require('./Routes/treatmentRoute');
+const AuthRoute = require('./Routes/authRoutes');
 
 const app = express();
 
@@ -21,6 +24,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(petRouter);
 app.use('/form', AdoptFormRoute);
 app.use('/admin', AdminRoute);
+app.use('/api/auth', AuthRoute);
+app.use('/api/cart', CartRoute); 
+app.use('/api/treatments', TreatmentRoute);
 
 // 🔍 Debug the MONGO_URI value
 console.log('Connecting to MongoDB at:', process.env.MONGO_URI);
