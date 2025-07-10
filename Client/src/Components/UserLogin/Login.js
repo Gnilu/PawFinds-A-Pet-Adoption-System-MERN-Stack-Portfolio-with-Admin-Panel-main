@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -56,76 +55,124 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="modal-container">{/* FailedMsg modal */}</div>
-
-            <div className={`login-box ${isModalOpen ? 'blurred' : ''}`}>
-                <h1 className="welcome-title">heeee</h1>
-                <div className="form-card">
-                    <h3 className="form-heading">Login!</h3>
-                    <form method="POST" className="login-form" onSubmit={handleSubmit} noValidate>
-                        <div className="input-group">
-                            <label htmlFor="username" className="input-label">
-                                Username
-                            </label>
-                            <div className="input-wrapper">
-                                <input
-                                    type="text"
-                                    id="username"
-                                    value={formData.username}
-                                    onChange={handleChanges}
-                                    className="input-field"
-                                    placeholder="Enter your username"
-                                    required
-                                />
-                                {errors.username && (
-                                    <div className="error-text">{errors.username}</div>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="input-group">
-                            <label htmlFor="password" className="input-label">
-                                Password
-                            </label>
-                            <div className="input-wrapper password-wrapper">
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    id="password"
-                                    value={formData.password}
-                                    onChange={handleChanges}
-                                    className="input-field"
-                                    placeholder="Enter your password"
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className="eye-button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                >
-                                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
-                                </button>
-                            </div>
-                            {errors.password && (
-                                <div className="error-text">{errors.password}</div>
-                            )}
-                        </div>
-
-                        <button type="submit" className="submit-button">
-                            Login
+        <section style={styles.loginSection}>
+            <div style={styles.loginCard}>
+                <h3 style={styles.heading}>Login!</h3>
+                <form onSubmit={handleSubmit} noValidate>
+                    <input
+                        type="text"
+                        id="username"
+                        value={formData.username}
+                        onChange={handleChanges}
+                        placeholder="Username"
+                        style={styles.input}
+                        required
+                    />
+                    {errors.username && (
+                        <div style={styles.errorText}>{errors.username}</div>
+                    )}
+                    <div style={styles.passwordWrapper}>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            value={formData.password}
+                            onChange={handleChanges}
+                            placeholder="Password"
+                            style={styles.input}
+                            required
+                        />
+                        <button
+                            type="button"
+                            style={styles.eyeButton}
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                         </button>
+                    </div>
+                    {errors.password && (
+                        <div style={styles.errorText}>{errors.password}</div>
+                    )}
 
-                        <p className="signup-link">
-                            Not a member?{' '}
-                            <Link to="/registration" className="signup-highlight">
-                                Signup
-                            </Link>
-                        </p>
-                    </form>
-                </div>
+                    <button type="submit" style={styles.submitButton}>Login</button>
+
+                    <p style={styles.signupText}>
+                        Not a member?{' '}
+                        <Link to="/registration" style={styles.signupLink}>
+                            Signup
+                        </Link>
+                    </p>
+                </form>
             </div>
-        </div>
+        </section>
     );
+};
+
+const styles = {
+    loginSection: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '50vh',
+        backgroundColor: '#f9f9f9',
+        padding: '20px'
+    },
+    loginCard: {
+        maxWidth: '400px',
+        width: '100%',
+        padding: '30px',
+        backgroundColor: '#fff',
+        borderRadius: '12px',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+    },
+    heading: {
+        textAlign: 'center',
+        marginBottom: '20px'
+    },
+    input: {
+        width: '100%',
+        padding: '10px 14px',
+        margin: '10px 0',
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        fontSize: '14px'
+    },
+    passwordWrapper: {
+        position: 'relative'
+    },
+    eyeButton: {
+        position: 'absolute',
+        right: '10px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer'
+    },
+    submitButton: {
+        width: '100%',
+        backgroundColor: '#ffa54f',
+        color: '#fff',
+        border: 'none',
+        padding: '12px',
+        borderRadius: '6px',
+        cursor: 'pointer',
+        marginTop: '15px',
+        fontSize: '15px'
+    },
+    signupText: {
+        textAlign: 'center',
+        marginTop: '15px',
+        fontSize: '14px'
+    },
+    signupLink: {
+        color: '#ffa54f',
+        textDecoration: 'none',
+        fontWeight: 'bold'
+    },
+    errorText: {
+        color: 'red',
+        fontSize: '12px'
+    }
 };
 
 export default Login;

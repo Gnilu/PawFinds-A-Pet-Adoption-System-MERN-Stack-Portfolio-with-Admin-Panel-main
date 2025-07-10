@@ -14,7 +14,7 @@ import Appointment from "./Components/Appointment/Appointment";
 import TreatmentList from "./Components/Treatment/TreatmentList";
 import CartPage from "./Components/Cart/Cart";
 import Login from "./Components/UserLogin/Login";
-
+import UserAccount from "./Components/Accounts/UserAccount";
 
 const Layout = ({ children }) => (
   <>
@@ -100,7 +100,14 @@ const App = () => {
           </Layout>
         }
         />
-        
+        <Route 
+        path="/user-account"
+        element={
+          <Layout>
+            <UserAccount/>
+          </Layout>
+        }
+        />
         <Route 
           path="/admin" 
           element={<AdminPanel />} 

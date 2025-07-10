@@ -1,7 +1,7 @@
-* {
+*body, html {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
 }
 
 /* :root {
@@ -23,11 +23,11 @@
 
 .navbar-container {
     width: 100%;
-    margin: 0 auto;
+    margin: 0 ;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 35px;
+    
 }
 
 .navbar-logo {
@@ -42,6 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 50px;
 }
 
 .navbar-links li {

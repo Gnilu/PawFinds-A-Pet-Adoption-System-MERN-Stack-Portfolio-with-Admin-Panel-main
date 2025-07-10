@@ -1,72 +1,192 @@
-// UserProfile.js
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-const UserAccount = () => {
-  const [user, setUser] = useState({ name: '', address: '', email: '', contact: '' });
+const Register = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState({});
 
-  const handleUserChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+  const handleChanges = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSaveUser = () => {
-    alert('User Account saved!');
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.username.trim()) errors.username = "Username is required";
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Invalid email format";
+    }
+    if (!formData.password) errors.password = "Password is required";
+    if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+    return errors;
   };
 
-  return (<section className='user-account'>
-    <div style={styles.profileContainer}>
-      <h2>User Profile</h2>
-      <input style={styles.input} name="name" placeholder="Name" value={user.name} onChange={handleUserChange}  required/>
-      <input style={styles.input} name="address" placeholder="Address" value={user.address} onChange={handleUserChange} required />
-      <input style={styles.input} name="email" placeholder="Email" value={user.email} onChange={handleUserChange} required />
-      <input style={styles.input} name="contact" placeholder="Contact Number" value={user.contact} onChange={handleUserChange} required/>
-      <div style={styles.btnGroup}>
-        <button style={styles.cancelButton} onClick={() => setUser({ name: '', address: '', email: '', contact: '' })}>Cancel</button>
-        <button style={styles.saveButton} onClick={handleSaveUser}>Save Changes</button>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newErrors = validateForm();
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      alert("Form submission failed due to validation errors");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/auth/register",
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+      if (response.status === 201) {
+        alert("Registration successful!");
+        localStorage.setItem("authToken", response.data.token);
+        navigate("/login");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Registration failed");
+    }
+  };
+
+  return (
+    <section style={styles.section}>
+      <div style={styles.card}>
+        <h3 style={styles.heading}>Signup</h3>
+        <form onSubmit={handleSubmit} noValidate>
+          <input
+            type="text"
+            id="username"
+            value={formData.username}
+            onChange={handleChanges}
+            placeholder="Username"
+            style={styles.input}
+            required
+          />
+          {errors.username && (
+            <div style={styles.errorText}>{errors.username}</div>
+          )}
+
+          <input
+            type="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChanges}
+            placeholder="Email"
+            style={styles.input}
+            required
+          />
+          {errors.email && <div style={styles.errorText}>{errors.email}</div>}
+
+          <input
+            type="password"
+            id="password"
+            value={formData.password}
+            onChange={handleChanges}
+            placeholder="Password"
+            style={styles.input}
+            required
+          />
+          {errors.password && (
+            <div style={styles.errorText}>{errors.password}</div>
+          )}
+
+          <input
+            type="password"
+            id="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChanges}
+            placeholder="Confirm Password"
+            style={styles.input}
+            required
+          />
+          {errors.confirmPassword && (
+            <div style={styles.errorText}>{errors.confirmPassword}</div>
+          )}
+
+          <button type="submit" style={styles.button}>
+            Register
+          </button>
+
+          <p style={styles.linkText}>
+            Already have an account?{" "}
+            <Link to="/login" style={styles.link}>
+              Login
+            </Link>
+          </p>
+        </form>
       </div>
-    </div>
- </section> );
+    </section>
+  );
 };
 
 const styles = {
-  profileContainer: {
-    maxWidth: '600px',
-    margin: '40px auto',
-    padding: '30px',
-    backgroundColor: '#f9f9f9',
-    borderRadius: '12px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)'
+  section: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "50vh",
+    backgroundColor: "#f9f9f9",
+    padding: "20px",
+  },
+  card: {
+    maxWidth: "400px",
+    width: "100%",
+    padding: "30px",
+    backgroundColor: "#fff",
+    borderRadius: "12px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+  },
+  heading: {
+    textAlign: "center",
+    marginBottom: "20px",
   },
   input: {
-    width: '100%',
-    padding: '10px 14px',
-    margin: '10px 0',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    fontSize: '14px'
+    width: "100%",
+    padding: "10px 14px",
+    margin: "10px 0",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    fontSize: "14px",
   },
-  btnGroup: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '20px'
+  button: {
+    width: "100%",
+    backgroundColor: "#ffa54f",
+    color: "#fff",
+    border: "none",
+    padding: "12px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    marginTop: "15px",
+    fontSize: "15px",
   },
-  cancelButton: {
-    backgroundColor: '#aaa',
-    color: '#fff',
-    border: 'none',
-    padding: '10px 20px',
-    borderRadius: '6px',
-    cursor: 'pointer'
+  linkText: {
+    textAlign: "center",
+    marginTop: "15px",
+    fontSize: "14px",
   },
-  saveButton: {
-    backgroundColor: '#ffa54f',
-    color: '#fff',
-    border: 'none',
-    padding: '10px 20px',
-    borderRadius: '6px',
-    cursor: 'pointer'
-  }
+  link: {
+    color: "#ffa54f",
+    textDecoration: "none",
+    fontWeight: "bold",
+  },
+  errorText: {
+    color: "red",
+    fontSize: "12px",
+  },
 };
 
-export default UserAccount;
+export default Register;
