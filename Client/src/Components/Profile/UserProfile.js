@@ -19,24 +19,44 @@ const UserProfilePage = () => {
     setShowPetForm(false);
   };
 
+  const [userImage, setUserImage] = useState(null);
+
+const handleImageUpload = (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    setUserImage(URL.createObjectURL(file));
+  }
+};
+
+
   return (
     <div className="user-profile">
       <h2>User Profile</h2>
+      <div className='detail-container'>
+      <div className="user-image-upload">
+  <input type="file" accept="image/*" onChange={handleImageUpload} />
+  {userImage && <img src={userImage} alt="Profile" className="user-image" />}
+</div>
       <div className="user-details">
         <input name="name" placeholder="Name" value={userDetails.name} onChange={handleUserChange} />
         <input name="email" placeholder="Email" value={userDetails.email} onChange={handleUserChange} />
         <input name="phone" placeholder="Phone" value={userDetails.phone} onChange={handleUserChange} />
         <input name="address" placeholder="Address" value={userDetails.address} onChange={handleUserChange} />
-        <button>Save Changes</button>
+        </div>
+        </div>
+        <div>
+        <button className="cancel-btn">Cancel</button>
+        <button className='save-btn'>Save Changes</button>
       </div>
+      <hr/>
 
-      <button onClick={() => setShowPetForm(!showPetForm)}>Add Pet Profile</button>
+      <button className='add-pet' onClick={() => setShowPetForm(!showPetForm)}>Add Pet Profile</button>
 
       {showPetForm && (
         <div className="pet-form">
           <input name="name" placeholder="Pet Name" value={petDetails.name} onChange={handlePetChange} />
           <input name="image" placeholder="Image URL" value={petDetails.image} onChange={handlePetChange} />
-          <button onClick={addPetProfile}>Create Pet Profile</button>
+          <button className='create-pet-btn' onClick={addPetProfile}>Create Pet Profile</button>
         </div>
       )}
 
