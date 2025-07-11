@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
+const authController = require('../Controller/authController');
 const multer = require('multer');
 
 // For file uploads
@@ -14,9 +14,9 @@ const upload = multer({ storage });
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 
-router.post('/admin', upload.single('user_image'), authController.addAdmin);
-router.get('/admins', authController.getAllAdmins);
-router.delete('/admin/:user_id', authController.deleteAdmin);
+//router.post('/admin', upload.single('user_image'), authController.addAdmin);
+//router.get('/admins', authController.getAllAdmins);
+//router.delete('/admin/:user_id', authController.deleteAdmin);
 
 router.get('/users', authController.getAllUsers);
 

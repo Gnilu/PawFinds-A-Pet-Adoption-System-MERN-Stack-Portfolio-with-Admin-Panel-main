@@ -8,8 +8,8 @@ const path = require('path');
 const petRouter = require('./Routes/PetRoute');
 const AdoptFormRoute = require('./Routes/AdoptFormRoute');
 const AdminRoute = require('./Routes/AdminRoute');
-const CartRoute = require('./Routes/cartRoute'); 
-const TreatmentRoute = require('./Routes/treatmentRoute');
+const CartRoute = require('./Routes/cartRoutes'); 
+const TreatmentRoute = require('./Routes/treatmentRoutes');
 const AuthRoute = require('./Routes/authRoutes');
 
 const app = express();

@@ -12,6 +12,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  const [profilePic, setProfilePic] = useState(null);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -19,6 +20,10 @@ const Register = () => {
   const handleChanges = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    setProfilePic(e.target.files[0]);
   };
 
   const validateForm = () => {
@@ -47,14 +52,24 @@ const Register = () => {
     }
 
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("username", formData.username);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("password", formData.password);
+      if (profilePic) {
+        formDataToSend.append("profilePic", profilePic);
+      }
+
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
+        formDataToSend,
         {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
+
       if (response.status === 201) {
         alert("Registration successful!");
         localStorage.setItem("authToken", response.data.token);
@@ -139,6 +154,24 @@ const Register = () => {
             <div style={styles.errorText}>{errors.confirmPassword}</div>
           )}
 
+          <input
+            type="file"
+            id="profilePic"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={styles.input}
+          />
+
+          {profilePic && (
+            <div style={{ textAlign: "center", margin: "10px 0" }}>
+              <img
+                src={URL.createObjectURL(profilePic)}
+                alt="Preview"
+                style={{ width: "80px", height: "80px", borderRadius: "50%" }}
+              />
+            </div>
+          )}
+
           <button type="submit" style={styles.button}>
             Register
           </button>
@@ -221,7 +254,6 @@ const styles = {
     border: "none",
     cursor: "pointer",
     fontSize: "12px",
-    
   },
 };
 

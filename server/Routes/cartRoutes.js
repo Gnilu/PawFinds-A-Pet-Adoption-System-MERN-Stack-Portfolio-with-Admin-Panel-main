@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const cartController = require("../controllers/cartController");
-const auth = require("../middleware/auth");
+const cartController = require("../Controller/cartController");
+const auth = require("../Middleware/authMiddleware");
 
 router.use(auth);
 

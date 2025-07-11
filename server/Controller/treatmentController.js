@@ -1,4 +1,4 @@
-const Treatment = require("../models/Treatment");
+const Treatment = require("../Model/Treatments");
 
 // GET all treatments
 exports.getAllTreatments = async (req, res) => {
