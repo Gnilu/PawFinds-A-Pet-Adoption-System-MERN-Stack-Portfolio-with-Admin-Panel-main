@@ -40,7 +40,7 @@ const Navbar = ({ onAboutClick }) => {
             </button>
           </li>
           <li>
-            <Link to="/pets">Pets</Link>
+            <Link to="/pets">Shop</Link>
           </li>
           <li>
             <Link to="/contact">Contact Us</Link>
@@ -68,79 +68,88 @@ const Navbar = ({ onAboutClick }) => {
       </div>
 
       <style>{`
+      .navbar-container {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
+      }
+
       .navbar-links {
-      display: flex;
-      gap: 15px;
-      padding: 8px 20px;
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
-      list-style: none;
-}
+        display: flex;
+        gap: 15px;
+        padding: 8px 20px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+        list-style: none;
+      }
 
       li .about-link-btn {
-      all: unset;
-      cursor: pointer;
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 20px;
-      color: #333;
-      font-size: 16px;
-      font-weight: bold;
-      background-clip: padding-box;
-      transition: background 0.3s, color 0.3s;
-}
+        all: unset;
+        cursor: pointer;
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 20px;
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+        background-clip: padding-box;
+        transition: background 0.3s, color 0.3s;
+      }
 
       .navbar-links a {
-      padding: 8px 14px;
-      border-radius: 20px;
-      transition: background 0.3s, color 0.3s;
-      text-decoration: none;
-      color: #333;
-      font-size:14px;
-  }
+        padding: 8px 14px;
+        border-radius: 20px;
+        transition: background 0.3s, color 0.3s;
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+      }
 
       .navbar-links a:hover {
-      background: #f0f0f0;
-      color: #ff6600;
-    }
+        background: #f0f0f0;
+        color: #ff6600;
+      }
 
-    li .about-link-btn:hover {
-      background: #f0f0f0;
-      color: #ff6600;
-    }
-     
+      li .about-link-btn:hover {
+        background: #f0f0f0;
+        color: #ff6600;
+      }
+
       .dropdown-menu {
-      position: absolute;
-      right: 0;
-      
-      width: 180px;
-      background: white;
-      border: 1px solid orange;
-      border-radius: 8px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      z-index: 1000;
-    }
+        position: absolute;
+        right: 0;
+        width: 180px;
+        background: white;
+        border: 1px solid orange;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        z-index: 1000;
+      }
 
-    .dropdown-menu a {
-      display: block;
-      padding: 10px 16px;
-      color: #333;
-      text-decoration: none;
-      font-size: 14px;
-      text:bold;
-    }
+      .dropdown-menu a {
+        display: block;
+        padding: 10px 16px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+      }
 
-    .dropdown-menu a:hover {
-      background-color: #f5f5f5;
-    }
+      .dropdown-menu a:hover {
+        background-color: #f5f5f5;
+      }
 
-    .user:hover, .cart:hover {
-      transform: scale(0.8);
-      transition: transform 0.2s ease;
-      box-shadow: 0 0 2px rgba(0,0,0,0.3);
-      border-radius: 20%;
-    }
-
+      .user:hover, .cart:hover {
+        transform: scale(0.8);
+        transition: transform 0.2s ease;
+        box-shadow: 0 0 2px rgba(0,0,0,0.3);
+        border-radius: 20%;
+      }
       `}</style>
     </>
   );

@@ -42,19 +42,20 @@ const Home = () => {
         <div className="news-cards">
           <div className="news-card-left">
             <h3>World Rabies Day 2025</h3>
-            <p>Join our mission to eliminate rabies by 2030 through education and pet vaccination awareness.</p>
+            <p> <br/><br/>World Rabies Day is a global awareness campaign aimed at educating communities about rabies prevention. Pet owners are encouraged to vaccinate their pets and spread awareness about responsible pet ownership. Stay tuned for events and vaccination drives in Sri Lanka!</p>
           </div>
           <div className='news-cards-right'>
           <div className="news-card">
             <h3>Pet Health Alert!</h3>
-            <p>Recent rise in tick-borne illnesses. Ensure your pet’s protection today!</p>
+            <p>Rise in Ticks and Fleas with Changing Weather Veterinarians across Sri Lanka are noticing a seasonal rise in tick and flea infestations. Make sure your pets are protected with regular treatments. Visit our clinic for tick prevention advice and the latest anti-parasitic medications.</p>
           </div>
           <div className="news-cards-below">
             <div className='news-img-card'>
               <img src={DogImageSitting} alt="Dog & Cat sitting" />
             </div>
             <div className='news-card-below'>
-              <p>Keep Your Pets Cool this Summer. Hydration and shade are key.</p>
+              <h3>Keep Your Pets Cool</h3>
+              <p>With rising temperatures in Sri Lanka, pets are at higher risk of heatstroke. Keep them hydrated, avoid walks during midday, and never leave them in parked vehicles. Check our blog for summer care tips.</p>
             </div>
           </div>
           </div>
@@ -65,13 +66,13 @@ const Home = () => {
         <h2>What Our Customers Say?</h2>
         <div className="testimonial-cards">
           <div className="testimonial-card">
-            “Excellent service and clean environment. My dog loves the staff here!”
+            "Excellent service and clean facilities. The staff are friendly and explain everything clearly. The new pet health app is also super useful for keeping track of vaccinations and appointments."
           </div>
           <div className="testimonial-card highlight">
-            “When my cat had ticks, they treated her gently and professionally. Highly recommend PetcRe.”
+            "When my cat suddenly fell ill, the team at the clinic responded quickly and treated her with such compassion. They even followed up a few days later to check on her progress. I really appreciate their dedication."
           </div>
           <div className="testimonial-card">
-            “Affordable treatments and trustworthy advice. We always visit for vaccinations.”
+            "I’ve been bringing my Labrador, Max, to this clinic for over two years now. The vets are incredibly caring and professional. Max actually enjoys coming here! Highly recommended for anyone who wants quality care for their pets."
           </div>
         </div>
       </section>
