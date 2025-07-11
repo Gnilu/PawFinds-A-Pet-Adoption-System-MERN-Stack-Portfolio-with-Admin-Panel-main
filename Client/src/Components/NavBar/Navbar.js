@@ -4,7 +4,7 @@ import logo from "../../Images/Logo.png";
 import cart from "./images/cart.png";
 import user from "./images/user.png";
 
-const Navbar = () => {
+const Navbar = ({ onAboutClick }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -33,6 +33,11 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/services">Services</Link>
+          </li>
+          <li>
+            <button onClick={onAboutClick} className="about-link-btn">
+              About Us
+            </button>
           </li>
           <li>
             <Link to="/pets">Pets</Link>
@@ -71,16 +76,35 @@ const Navbar = () => {
       border-radius: 50px;
       list-style: none;
 }
+
+      li .about-link-btn {
+      all: unset;
+      cursor: pointer;
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 20px;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      background-clip: padding-box;
+      transition: background 0.3s, color 0.3s;
+}
+
       .navbar-links a {
       padding: 8px 14px;
       border-radius: 20px;
       transition: background 0.3s, color 0.3s;
       text-decoration: none;
       color: #333;
-      font-size:14px:
+      font-size:14px;
   }
 
       .navbar-links a:hover {
+      background: #f0f0f0;
+      color: #ff6600;
+    }
+
+    li .about-link-btn:hover {
       background: #f0f0f0;
       color: #ff6600;
     }
@@ -110,12 +134,13 @@ const Navbar = () => {
       background-color: #f5f5f5;
     }
 
-    .user:hover {
+    .user:hover, .cart:hover {
       transform: scale(0.8);
       transition: transform 0.2s ease;
       box-shadow: 0 0 2px rgba(0,0,0,0.3);
       border-radius: 20%;
     }
+
       `}</style>
     </>
   );
