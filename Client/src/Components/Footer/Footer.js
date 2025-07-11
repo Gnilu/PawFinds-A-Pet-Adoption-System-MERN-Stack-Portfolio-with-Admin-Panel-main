@@ -1,12 +1,19 @@
 import React from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import Logo from "../../Images/Logo.png";
-import Footer_img from "../../Images/Footer_img.png";
+import Footer_bg from "../../Images/Footer_img.jpeg"; 
 
 const Footer = () => {
-  
   return (
-    <footer style={styles.footer}>
+    <footer style={{ 
+      ...styles.footer, 
+      backgroundImage: `url(${Footer_bg})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundColor: "rgba(255, 255, 255, 0.8)", 
+  backgroundBlendMode: "overlay" 
+    }}>
       <div style={{ ...styles.section, ...styles.left }}>
         <img src={Logo} alt="PetCare Logo" style={styles.logo} />
         <h3 style={styles.clinicName}>Pet Care Clinic</h3>
@@ -14,10 +21,6 @@ const Footer = () => {
           <p style={styles.contact}><FaPhone /> Phone: (123) 456-7890</p>
           <p style={styles.contact}><FaEnvelope /> Email: petcare@gmail.com</p>
         </div>
-      </div>
-
-      <div style={{ ...styles.section, ...styles.center }}>
-        <img src={Footer_img} alt="Happy Pets" style={styles.footerImage} />
       </div>
 
       <div style={{ ...styles.section, ...styles.right }}>
@@ -34,85 +37,80 @@ const Footer = () => {
     </footer>
   );
 };
-const styles = {
-    footer: {
-      background: "#a0dce0",
-      padding: "30px 40px",
-      borderTopLeftRadius: "35px",
-      borderTopRightRadius: "35px",
-      textAlign: "center",
-    },
-    section: {
-      display: "inline-block",
-      verticalAlign: "top",
-      margin: "0 15px",
-    },
-    
-    left: {
-      textAlign: "left",
-      width: "30%",
-    },
 
-    box:{
-      border:"box" ,
-      color:"black",
-      borderRadius:"5px",
-      marginTop:"5px"
-    },
-    logo: {
-      width: "120px",
-      height: "auto",
-      marginBottom: "2px",
-    },
-    clinicName: {
-      color: "#f18040",
-      marginTop: "2px",
-      fontSize:"20px",
-    },
-    contact: {
-      margin: "5px 0",
-      fontSize: "14px",
-    },
-    center: {
-      width: "30%",
-    },
-    footerImage: {
-      width: "80%",
-      height: "auto",
-      marginTop:"10px",
-      align:"center",
-    },
-    right: {
-      width: "30%",
-      textAlign: "center",
-    },
-    rightText: {
-      fontSize: "25px",
-      marginBottom: "10px",
-      marginTop:"50px"
-    },
-    btn: {
-      background: "#f18040",
-      color: "white",
-      border: "none",
-      padding: "10px 18px",
-      borderRadius: "20px",
-      cursor: "pointer",
-    },
-    bottom: {
-      marginTop: "20px",
-    },
-    hr: {
-      border: 0,
-      borderTop: "2px solid #333",
-      margin: "10px 0",
-      width: "95%",
-    },
-    bottomText: {
-      fontSize: "12px",
-      color: "#333",
-    },
-  };
+const styles = {
+  footer: {
+    padding: "10px 10px",
+    borderTopLeftRadius: "35px",
+    borderTopRightRadius: "35px",
+    textAlign: "center",
+    color: "black",
+    position: "relative",
+  },
+  section: {
+    display: "inline-block",
+    verticalAlign: "top",
+    margin: "0 15px",
+  },
+  left: {
+    textAlign: "left",
+    width: "45%",
+  },
+  box: {
+    border: "1px solid #333",
+    borderRadius: "5px",
+    padding: "5px",
+    marginTop: "5px",
+    marginLeft: "120px"
+  },
+  logo: {
+    width: "120px",
+    height: "auto",
+    marginBottom: "1px",
+    marginLeft: "100px"
+  },
+  clinicName: {
+    color: "#f18040",
+    marginTop: "0px",
+    fontSize: "20px",
+    marginLeft: "120px"
+  },
+  contact: {
+    margin: "4px 0px",
+    fontSize: "14px",
+    
+  },
+  right: {
+    width: "45%",
+    textAlign: "center",
+  },
+  rightText: {
+    fontSize: "25px",
+    marginBottom: "10px",
+    marginTop: "50px"
+  },
+  btn: {
+    background: "#f18040",
+    color: "white",
+    border: "none",
+    padding: "10px 18px",
+    borderRadius: "20px",
+    cursor: "pointer",
+  },
+  bottom: {
+    marginTop: "20px",
+  },
+  hr: {
+    border: 0,
+    borderTop: "2px solid #333",
+    margin: "10px 0",
+    width: "95%",
+  },
+  bottomText: {
+    fontSize: "15px",
+    color: "#333",
+    
+  },
+};
 
 export default Footer;
-

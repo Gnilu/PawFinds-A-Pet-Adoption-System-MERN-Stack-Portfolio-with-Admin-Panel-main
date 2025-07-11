@@ -1,6 +1,7 @@
 import React from "react";
 import Map from './images/Map.png';
 import './Contact.css';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 const Contact = () => {
   return (
@@ -18,7 +19,8 @@ const Contact = () => {
         </a>
 
         
-        <i class="fa-solid fa-location-dot"></i>
+       
+        <FaMapMarkerAlt style={{ fontSize: "48px",  margin: "25px 0 10px 0" }} />
         <p>  Pambahinna</p>
       </div>
       <div className="contactUs-pic">
