@@ -14,13 +14,12 @@ const Contact = () => {
 
         <i class="fa fa-phone"></i>
         <a class="mail-links" href="tel:+923019583959">
-          +92 301 9583959
+          +94 70 677 9667
         </a>
 
-        <p>
+        
         <i class="fa-solid fa-location-dot"></i>
-          Pabahinna
-        </p>
+        <p>  Pambahinna</p>
       </div>
       <div className="contactUs-pic">
         <img src={Map} alt="Location"/>
