@@ -10,28 +10,28 @@ const AdminAppointments = () => {
   }, []);
 
   const fetchAppointments = () => {
-    axios.get('/api/admin/appointments') // Replace with actual endpoint
+    axios.get('http://localhost:5000/api/appointments') // Replace with actual endpoint
       .then(res => setAppointments(res.data))
       .catch(err => console.error('Error fetching appointments:', err));
   };
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this appointment?')) {
-      axios.delete(`/api/admin/appointments/${id}`)
+      axios.delete(`http://localhost:5000/api/admin/appointments/${id}`)
         .then(() => fetchAppointments())
         .catch(err => console.error('Delete failed:', err));
     }
   };
 
   const handleStatusChange = (id, newStatus) => {
-    axios.put(`/api/admin/appointments/${id}/status`, { status: newStatus })
+    axios.put(`http://localhost:5000/api/admin/appointments/${id}/status`, { status: newStatus })
       .then(() => fetchAppointments())
       .catch(err => console.error('Status update failed:', err));
   };
 
   const viewUserProfile = (userId) => {
     // Replace with navigation logic (React Router or modal)
-    window.location.href = `/admin/user-profile/${userId}`;
+    window.location.href = `http://localhost:5000/admin/user-profile/${userId}`;
   };
 
   return (

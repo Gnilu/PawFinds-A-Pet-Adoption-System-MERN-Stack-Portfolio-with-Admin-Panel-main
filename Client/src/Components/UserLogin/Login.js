@@ -43,7 +43,7 @@ const Login = () => {
                 localStorage.setItem('role', response.data.role);
 
                 if (['admin', 'super admin'].includes(response.data.role)) {
-                    navigate('/dashboard');
+                    navigate('/admin');
                 } else if (response.data.role === 'user') {
                     navigate('/');
                 }

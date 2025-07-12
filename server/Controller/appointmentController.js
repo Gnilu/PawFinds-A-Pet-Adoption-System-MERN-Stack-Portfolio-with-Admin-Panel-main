@@ -13,7 +13,10 @@ exports.getAppointments = async (req, res) => {
 // ✅ DELETE appointment
 exports.deleteAppointment = async (req, res) => {
   try {
-    await Appointment.findByIdAndDelete(req.params.id);
+    const deleted = await Appointment.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
     res.json({ message: 'Appointment deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -29,6 +32,9 @@ exports.updateAppointmentStatus = async (req, res) => {
       { status },
       { new: true }
     );
+    if (!appointment) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
     res.json(appointment);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -40,7 +46,6 @@ exports.createAppointment = async (req, res) => {
   try {
     const { date, timeSlot } = req.body;
 
-    // check if already booked
     const existing = await Appointment.findOne({ date, timeSlot });
     if (existing) {
       return res.status(400).json({
@@ -48,7 +53,6 @@ exports.createAppointment = async (req, res) => {
       });
     }
 
-    // create appointment
     const newAppointment = new Appointment(req.body);
     await newAppointment.save();
 
@@ -63,8 +67,6 @@ exports.getBookedSlots = async (req, res) => {
   try {
     const { date } = req.query;
     const appointments = await Appointment.find({ date });
-
-    // return array of booked slots
     const bookedSlots = appointments.map(a => a.timeSlot);
     res.json(bookedSlots);
   } catch (err) {
