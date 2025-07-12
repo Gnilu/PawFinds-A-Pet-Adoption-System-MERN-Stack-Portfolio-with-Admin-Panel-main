@@ -16,8 +16,14 @@ router.post('/register', authController.register);
 router.get("/me", authMiddleware, authController.getProfile);
 router.post('/login', authController.login);
 router.get('/users', authController.getAllUsers);
+router.post(
+  "/upload-profile",
+  authMiddleware,
+  authController.uploadMiddleware,
+  authController.uploadProfileImage
+);
 
-// ✅ Admin creation (TEMPORARY: use once to add first admin)
+//  Admin creation (TEMPORARY: use once to add first admin)
 router.post('/create-admin', authController.createAdmin); // ← ADD THIS
 
 module.exports = router;

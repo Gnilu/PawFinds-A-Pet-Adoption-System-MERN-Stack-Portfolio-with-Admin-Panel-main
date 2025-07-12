@@ -20,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/images', express.static(path.join(__dirname, 'public/images/pet-image')));
+app.use('/profile-images', express.static(path.join(__dirname, 'public/images/profiles')));
 
 // Mount your routes here
 app.use(petRouter);
