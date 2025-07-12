@@ -182,21 +182,18 @@ const Navbar = ({ onAboutClick }) => {
   font-size: 22px;
   background-color: white;
   color: #333;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  border: none;
+  width: 60px;
+  height: 60px;
   text-align: center;
   line-height: 36px;
   padding: 0;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .menu-icon:hover {
-  background-color: #f5f5f5;
-  transform: scale(1.05);
+   transform: scale(0.8);
+   transition: transform 0.2s ease;
 }
 
 /* Responsive styles for 760px and below */
