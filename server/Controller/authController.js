@@ -76,6 +76,26 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.getProfile = async (req, res) => {
+  try {
+    console.log("✅ req.user in getProfile:", req.user);
+    const user = await User.findById(req.user.userId).select("-password");
+    console.log("Fetched user profile:", user);
+    console.log("🚀 Sending user profile:", user);
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log("🚀 Sending user profile:", user);
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
 // Fetch all users (role: user)
 exports.getAllUsers = async (req, res) => {
   try {

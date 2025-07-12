@@ -12,6 +12,7 @@ const Profile = () => {
         const response = await axios.get("http://localhost:5000/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` }
         });
+        console.log("User data fetched:", response.data);
         setUser(response.data);
       } catch (err) {
         console.error(err);
