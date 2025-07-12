@@ -42,14 +42,26 @@ const Navbar = ({ onAboutClick }) => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <button className="about-link-btn" onClick={handleServicesClick}>
+            <Link
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                handleServicesClick();
+              }}
+            >
               Services
-            </button>
+            </Link>
           </li>
           <li>
-            <button onClick={onAboutClick} className="about-link-btn">
+            <Link
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                onAboutClick();
+              }}
+            >
               About Us
-            </button>
+            </Link>
           </li>
           <li>
             <Link to="/pets">Shop</Link>
@@ -110,37 +122,20 @@ const Navbar = ({ onAboutClick }) => {
         font-weight: bold;
       }
 
-      li .about-link-btn, .about-link-btn {
-        all: unset;
-        cursor: pointer;
-        display: inline-block;
-        padding: 8px 14px;
-        border-radius: 20px;
-        color: #333;
-        font-size: 14px;
-        font-weight: bold;
-        background-clip: padding-box;
-        transition: background 0.3s, color 0.3s;
-      }
+    
 
       .navbar-links a {
         display: inline-block;
         padding: 8px 14px;
-        
-        transition: background 0.3s, color 0.3s;
+        border-radius: 20px;
         text-decoration: none;
-        
+        color: #333;
         font-size: 14px;
         font-weight: bold;
-        font-family: 'Oxygen', sans-serif;
-      }
+        transition: background 0.3s, color 0.3s;
+}
 
       .navbar-links a:hover {
-        background: #f0f0f0;
-        color: #ff6600;
-      }
-
-      li .about-link-btn:hover, .about-link-btn:hover {
         background: #f0f0f0;
         color: #ff6600;
       }
