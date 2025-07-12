@@ -1,16 +1,18 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
+require('./Model/Item');
+
 const petRouter = require('./Routes/PetRoute');
 const AdoptFormRoute = require('./Routes/AdoptFormRoute');
 const AdminRoute = require('./Routes/AdminRoute');
-const CartRoute = require('./Routes/cartRoutes'); 
+const CartRoute = require('./Routes/cartRoutes');
 const TreatmentRoute = require('./Routes/treatmentRoutes');
 const AuthRoute = require('./Routes/authRoutes');
-const AppointmentsRoute = require('./Routes/appointmentRoutes'); // ✅ Use correct filename
+const AppointmentsRoute = require('./Routes/appointmentRoutes');
 
 const app = express();
 
@@ -19,14 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/images', express.static(path.join(__dirname, 'public/images/pet-image')));
 
-// Mount Routes
+// Mount your routes here
 app.use(petRouter);
 app.use('/form', AdoptFormRoute);
-app.use('/admin', AdminRoute);
+app.use('/api/admin', AdminRoute);           // <-- Admin routes including dashboard-summary
 app.use('/api/auth', AuthRoute);
-app.use('/api/cart', CartRoute); 
+app.use('/api/cart', CartRoute);
 app.use('/api/treatments', TreatmentRoute);
-app.use('/api', AppointmentsRoute); // ✅ This handles /api/appointments and /api/admin/appointments
+app.use('/api', AppointmentsRoute);
 
 console.log('Connecting to MongoDB at:', process.env.MONGO_URI);
 

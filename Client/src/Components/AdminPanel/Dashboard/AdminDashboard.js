@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const [appointmentAnalysisData, setAppointmentAnalysisData] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/admin/dashboard-summary')
+    axios.get('http://localhost:5000/api/admin/dashboard-summary')
       .then(res => {
         const data = res.data;
         setAppointmentsToday(data.todayAppointments);

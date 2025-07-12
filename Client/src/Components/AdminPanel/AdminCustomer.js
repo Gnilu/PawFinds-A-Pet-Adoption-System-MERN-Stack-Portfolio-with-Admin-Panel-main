@@ -10,14 +10,14 @@ const AdminCustomers = () => {
   }, []);
 
   const fetchCustomers = () => {
-    axios.get('/api/admin/customers') // Replace with your actual endpoint
+    axios.get('http://localhost:5000/api/admin/users') // Replace with your actual endpoint
       .then(res => setCustomers(res.data))
       .catch(err => console.error('Failed to fetch customers:', err));
   };
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this customer?')) {
-      axios.delete(`/api/admin/customers/${id}`)
+      axios.delete(`http://localhost:5000/api/admin/users/${id}`)
         .then(() => fetchCustomers())
         .catch(err => console.error('Delete failed:', err));
     }
@@ -30,19 +30,15 @@ const AdminCustomers = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Telephone</th>
             <th>Email</th>
-            <th>Address</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {customers.map(customer => (
             <tr key={customer._id}>
-              <td>{customer.name}</td>
-              <td>{customer.telephone}</td>
+              <td>{customer.username}</td>
               <td>{customer.email}</td>
-              <td>{customer.address}</td>
               <td>
                 <button
                   className="delete-btn"
