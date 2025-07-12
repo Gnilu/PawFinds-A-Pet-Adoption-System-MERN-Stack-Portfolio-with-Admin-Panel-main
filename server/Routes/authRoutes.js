@@ -12,7 +12,7 @@ const upload = multer({ storage });
 
 // Routes
 router.post('/register', authController.register);
-router.get("/me", authController.getMe);
+//router.get("/me", authController.getMe);
 router.post('/login', authController.login);
 
 //router.post('/admin', upload.single('user_image'), authController.addAdmin);
