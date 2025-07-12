@@ -8,6 +8,7 @@ import AdminDashboard from './Dashboard/AdminDashboard'
 import AdminAppointments from './Appointment'
 import AdminOrders from './AdminOrders'
 import AdminCustomers from './AdminCustomer'
+import AdminManagement from './AdminManagment'
 
 
 const AdminScreen = () => {
@@ -27,6 +28,7 @@ const AdminScreen = () => {
           <p onClick={() => setScreen('adoptedHistory')}>Adopted History</p> */}
            <p onClick={() => setScreen('treatments')}>Treatments</p>
            <p onClick={() => setScreen('customers')}>Customers</p>
+           <p onClick={() => setScreen('admins')}>Admin Management</p>
 
         </div>
       </div>
@@ -40,6 +42,7 @@ const AdminScreen = () => {
         {screen === 'adoptedHistory' && <AdoptedHistory />} */}
         {screen === 'treatments' && <AdminCreateArticle />}
         {screen === 'customers' && <AdminCustomers />}
+         {screen === 'admins' && <AdminManagement />}
       </div>
     </div>
     </div>
