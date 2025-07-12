@@ -1,7 +1,6 @@
-const Pet = require('../Model/PetModel');
-const fs = require('fs');
-const path = require('path');
+const Pet = require('../Model/Pet'); // Make sure the path is correct
 
+// Submit a new pet request
 const postPetRequest = async (req, res) => {
   try {
     const { name, age, area, justification, email, phone, type } = req.body;
@@ -15,7 +14,7 @@ const postPetRequest = async (req, res) => {
       email,
       phone,
       type,
-      filename,
+      filename: `pet-image/${filename}`,  // image stored as relative path
       status: 'Pending'
     });
 
@@ -25,53 +24,55 @@ const postPetRequest = async (req, res) => {
   }
 };
 
+// Approve a pet request
 const approveRequest = async (req, res) => {
   try {
-    const id = req.params.id;
-    const { email, phone, status } = req.body;
-    const pet = await Pet.findByIdAndUpdate(id, { email, phone, status }, { new: true });
+    const { id } = req.params;
 
-    if (!pet) {
+    const updatedPet = await Pet.findByIdAndUpdate(
+      id,
+      { status: 'Approved' },
+      { new: true }
+    );
+
+    if (!updatedPet) {
       return res.status(404).json({ error: 'Pet not found' });
     }
 
-    res.status(200).json(pet);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(200).json(updatedPet);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
-const allPets = async (reqStatus, req, res) => {
-  try {
-    const data = await Pet.find({ status: reqStatus }).sort({ updatedAt: -1 });
-    if (data.length > 0) {
-      res.status(200).json(data);
-    } else {
-      res.status(404).json({ error: 'No data found' });
-    }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
+// Delete a pet post
 const deletePost = async (req, res) => {
   try {
-    const id = req.params.id;
-    const pet = await Pet.findByIdAndDelete(id);
-    if (!pet) {
+    const { id } = req.params;
+
+    const deletedPet = await Pet.findByIdAndDelete(id);
+
+    if (!deletedPet) {
       return res.status(404).json({ error: 'Pet not found' });
     }
-    const filePath = path.join(__dirname, '../images', pet.filename);
 
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-    }
     res.status(200).json({ message: 'Pet deleted successfully' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
+// Get all pets by status (Pending / Approved / Adopted)
+const allPets = async (status, req, res) => {
+  try {
+    const pets = await Pet.find({ status });
+    res.status(200).json(pets);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// ✅ Export all controller functions
 module.exports = {
   postPetRequest,
   approveRequest,
