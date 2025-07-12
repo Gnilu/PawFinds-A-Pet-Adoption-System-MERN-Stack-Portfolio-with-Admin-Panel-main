@@ -8,16 +8,13 @@ import AdminDashboard from './Dashboard/AdminDashboard'
 import AdminAppointments from './Appointment'
 import AdminOrders from './AdminOrders'
 import AdminCustomers from './AdminCustomer'
-import Logo from '../../Images/Logo.png'
+
 
 const AdminScreen = () => {
   const [screen, setScreen] = useState('postingPet')
 
   return (
     <div>
-      <div className='logo'>
-        <img src={Logo} alt='logo'/>
-      </div>
     <div className='admin-screen-container'>
       <div className='admin-screen-left'>
         <div>
@@ -45,12 +42,6 @@ const AdminScreen = () => {
         {screen === 'customer' && <AdminCustomers />}
       </div>
     </div>
-
-    <style>{`
-    .logo img{
-    width: 20%;
-    }
-    `}</style>
     </div>
   )
 }

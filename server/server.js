@@ -1,4 +1,4 @@
-require('dotenv').config(); //  Load .env first
+require('dotenv').config(); 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -11,6 +11,9 @@ const AdminRoute = require('./Routes/AdminRoute');
 const CartRoute = require('./Routes/cartRoutes'); 
 const TreatmentRoute = require('./Routes/treatmentRoutes');
 const AuthRoute = require('./Routes/authRoutes');
+const AppointmentsRoute = require('./Routes/AppointmentRoutes');
+
+
 
 const app = express();
 
@@ -27,6 +30,8 @@ app.use('/admin', AdminRoute);
 app.use('/api/auth', AuthRoute);
 app.use('/api/cart', CartRoute); 
 app.use('/api/treatments', TreatmentRoute);
+app.use('/api', AppointmentsRoute);
+
 
 // 🔍 Debug the MONGO_URI value
 console.log('Connecting to MongoDB at:', process.env.MONGO_URI);

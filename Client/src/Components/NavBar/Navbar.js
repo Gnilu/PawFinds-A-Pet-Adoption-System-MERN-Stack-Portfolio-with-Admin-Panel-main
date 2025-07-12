@@ -104,10 +104,10 @@ const Navbar = ({ onAboutClick }) => {
 
       .navbar-links a {
         padding: 8px 14px;
-        border-radius: 20px;
+        
         transition: background 0.3s, color 0.3s;
         text-decoration: none;
-        color: #333;
+        
         font-size: 14px;
       }
 
