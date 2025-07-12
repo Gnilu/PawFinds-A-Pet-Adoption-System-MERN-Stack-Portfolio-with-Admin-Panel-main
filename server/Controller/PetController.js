@@ -1,9 +1,10 @@
-const Pet = require('../Model/Pet');
+const Pet = require('../Model/Pet'); // Make sure the path is correct
 
-// Add new pet (no image)
-exports.postPetRequest = async (req, res) => {
+// Submit a new pet request
+const postPetRequest = async (req, res) => {
   try {
     const { name, age, area, justification, email, phone, type } = req.body;
+    const { filename } = req.file;
 
     const pet = await Pet.create({
       name,
@@ -13,7 +14,7 @@ exports.postPetRequest = async (req, res) => {
       email,
       phone,
       type,
-      filename: '', // 🐾 No image, so empty
+      filename: `pet-image/${filename}`,  // image stored as relative path
       status: 'Pending'
     });
 
@@ -23,8 +24,8 @@ exports.postPetRequest = async (req, res) => {
   }
 };
 
-// Approve pet
-exports.approveRequest = async (req, res) => {
+// Approve a pet request
+const approveRequest = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -44,8 +45,8 @@ exports.approveRequest = async (req, res) => {
   }
 };
 
-// Delete pet
-exports.deletePost = async (req, res) => {
+// Delete a pet post
+const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -61,12 +62,20 @@ exports.deletePost = async (req, res) => {
   }
 };
 
-// Get all pets by status
-exports.allPets = async (status, req, res) => {
+// Get all pets by status (Pending / Approved / Adopted)
+const allPets = async (status, req, res) => {
   try {
     const pets = await Pet.find({ status });
     res.status(200).json(pets);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+// ✅ Export all controller functions
+module.exports = {
+  postPetRequest,
+  approveRequest,
+  deletePost,
+  allPets
 };

@@ -32,8 +32,7 @@ const petSchema = new mongoose.Schema({
   },
   filename: {
     type: String, // Path to uploaded image
-    default: ''
-    
+    required: true
   },
   status: {
     type: String,
