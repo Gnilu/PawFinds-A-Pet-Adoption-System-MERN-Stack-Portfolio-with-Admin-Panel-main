@@ -4,8 +4,12 @@ const User = require("../Model/User");
 
 // Register a new user (user only)
 exports.register = async (req, res) => {
-  const { username, email, password, confirmPassword } = req.body;
   console.log("Register payload:", req.body);
+  const { username, email, password, confirmPassword } = req.body;
+
+  if (!username || !email || !password || !confirmPassword) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
   if (password !== confirmPassword) {
     return res.status(400).json({ message: "Passwords do not match" });
@@ -23,7 +27,7 @@ exports.register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 8);
 
-    await User.create({
+    const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
@@ -63,6 +67,7 @@ exports.login = async (req, res) => {
 
     res.status(200).json({
       token,
+      username: user.username,
       role: user.role,
       message: user.role === "admin" ? "Admin logged in" : "User logged in",
     });
@@ -74,7 +79,7 @@ exports.login = async (req, res) => {
 // Fetch all users (role: user)
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({ role: "user" });
+    const users = await User.find({ role: "user" }).select("-password"); // Exclude passwords
     res.status(200).json({ status: "success", data: users });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });

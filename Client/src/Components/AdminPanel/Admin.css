@@ -21,6 +21,9 @@
 .navbar-left {
   display: flex;
   align-items: center;
+  background-color: #A8DADC;
+  color: black;
+  padding: 10px 20px;
 }
 
 .navbar-logo {
@@ -31,8 +34,11 @@
 }
 
 .navbar-brand {
-  font-size: 24px;
-  font-weight: bold;
+  padding: 0;
+}
+
+.navbar-brand img{
+  width: 50%;
 }
 
 .navbar-time {
@@ -51,7 +57,7 @@
 
 
 .admin-footer {
-  background-color: #fbc256;
+  background-color: #A8DADC;
   color: #fff;
   text-align: center;
   padding: 10px;
@@ -134,14 +140,14 @@
 .admin-screen-left p {
   font-weight: bold;
   font-size: large;
-  color: #fbc256;
+  color: #457B9D;
   font-family: "Varela Round", sans-serif;
   cursor: pointer;
   margin: 10px 0;
   display: flex;
   justify-content: flex-start;
   padding-bottom: 10px;
-  border-bottom: 2px solid #fbc256;
+  border-bottom: 2px solid #A8DADC;
 }
 
 .admin-screen-left p:hover {
@@ -149,7 +155,7 @@
  }
 
 .admin-screen-right {
-  border-left: 3px solid #fbc256;
+  border-left: 3px solid #A8DADC;
   padding: 0 4vw;
   max-width: 80vw;
   min-width: 80vw;

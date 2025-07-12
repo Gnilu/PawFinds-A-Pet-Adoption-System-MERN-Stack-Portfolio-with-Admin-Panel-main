@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import './PetProfile.css';
 
+
 const PetProfilePage = () => {
   const { id } = useParams();
   return (

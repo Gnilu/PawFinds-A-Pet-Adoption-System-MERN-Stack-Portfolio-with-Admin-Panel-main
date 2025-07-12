@@ -26,27 +26,18 @@ const DashboardCard = ({ title, count, icon, bgColor }) => {
 
 .dashboard-title {
   font-size: 1.125rem;
+  color: #1C274C;
 }
 
 .dashboard-count {
   font-size: 1.5rem;
   font-weight: bold;
   margin-top: 0.25rem;
+  color: #1C274C;
 }
 
 .dashboard-icon {
   font-size: 2rem;
-}
-
-/* Example background colors */
-.bg-blue {
-  background-color: #3B82F6;
-}
-.bg-green {
-  background-color: #10B981;
-}
-.bg-purple {
-  background-color: #8B5CF6;
 }
 
       `}</style>

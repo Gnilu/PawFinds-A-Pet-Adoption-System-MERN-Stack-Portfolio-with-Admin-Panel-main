@@ -18,6 +18,7 @@ import UserAccount from "./Components/Accounts/UserAccount";
 import UserProfilePage from "./Components/Profile/UserProfile";
 import AboutCanvas from "./Components/AboutUs/AboutUs";
 
+
 const Layout = ({ children, onAboutClick, isAboutOpen, onAboutClose }) => (
   <>
     <Navbar title="PawFinds" onAboutClick={onAboutClick} />
@@ -45,7 +46,7 @@ const App = () => {
             </Layout>
           }
         />
-        <Route
+         <Route
           path="/services"
           element={
             <Layout
@@ -56,7 +57,7 @@ const App = () => {
               <Services />
             </Layout>
           }
-        />
+        /> 
         <Route
           path="/contact"
           element={

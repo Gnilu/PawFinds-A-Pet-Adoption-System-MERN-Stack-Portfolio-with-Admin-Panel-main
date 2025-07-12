@@ -1,13 +1,12 @@
 import React from "react";
 import girlHoldingADog from "./images/girlHoldingADog.png";
 import homepageDog from "./images/homepageDog.png";
-import footPrint from "./images/footPrint.png";
 import { Link } from "react-router-dom";
 
 const HomeLandingContainer = (props) => {
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
+  // const scrollToTop = () => {
+  //   window.scrollTo(0, 0);
+  // };
   return (
     <div className="home-container">
       <div className="homeContainer-left">
@@ -25,12 +24,91 @@ const HomeLandingContainer = (props) => {
           </p>
         </div>
         <div className="adopt-btn">
-          <Link to='./appointment'><button className="Home-button" onClick={scrollToTop}><p>Make an Appointment</p><img src={footPrint} alt="footprint" /></button></Link>
+          <Link to='./appointment'><button className="Home-appointment-btn"><p>Make an Appointment</p></button></Link>
+          
         </div>
       </div>
       <div className="homeContainer-right">
         <img src={girlHoldingADog} alt='Girl holding a Dog'/>
       </div>
+
+      <style>{`
+      .home-container {
+        padding: 20px 50px 70px 50px;
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+}
+
+      .homeContainer-left {
+        width: 60vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+}
+
+      .home-title {
+        font-size: 70px;
+        line-height: 1.2;
+        font-weight: bold;
+        font-family: 'Preahvihear', sans-serif;
+}
+
+      .home-titlePlusPng {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+}
+
+      .home-titlePlusPng>img {
+        width: 80px;
+        margin-left: 10px;
+}
+
+      .home-second-para {
+        font-size: 18px;
+        color: grey;
+        margin: 20px 0px 20px 0px;
+}
+
+      .homeContainer-right {
+        padding-left: 40PX;
+        width: 35vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+      .Home-appointment-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px #e78a3c solid;
+        height: 42px;
+        width: 250px;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 20px;
+        background-color: white;
+        color: black;
+        box-shadow: 1.5px 1.5px 3px var(--orange);
+        font-family: 'Preahvihear', sans-serif;
+}
+
+      .adopt-btn>* {
+        text-decoration: none;
+}
+
+      .Home-appointment-btn:hover {
+        border: 2px #e78a3c solid;
+        background-color: #F4A261;
+        color: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+}
+
+      `}</style>
     </div>
   );
 };
