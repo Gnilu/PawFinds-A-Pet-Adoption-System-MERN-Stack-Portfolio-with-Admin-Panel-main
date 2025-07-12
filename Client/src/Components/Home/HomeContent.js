@@ -14,7 +14,7 @@ const Home = () => {
         <button className="btn-shop">Shop Products</button>
       </div>
 
-      <section className="services">
+      <section className="services" id='services'>
         <div className='background-box'></div>
         <h2>Our Services</h2>
         <div className="service-cards">
