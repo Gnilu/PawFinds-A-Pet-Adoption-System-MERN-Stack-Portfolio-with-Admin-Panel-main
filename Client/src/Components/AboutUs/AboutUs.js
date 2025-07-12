@@ -1,116 +1,103 @@
 import React from "react";
-import DoctorImage from "./images/Doctor-with-cat.png";
+import aboutImage from "./images/Doctor-with-cat.png"; // adjust path if needed
 
-const AboutCanvas = ({ isOpen, onClose }) => {
+const AboutUsModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
   return (
-    <div className={`about-canvas ${isOpen ? "show" : ""}`}>
-      <div className="canvas-content">
-        <button className="close-btn" onClick={onClose}>
-          ×
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>
+          ✖
         </button>
 
-        <div className="content-wrapper">
-          <div className="image-section">
-            <img src={DoctorImage} alt="Doctor with cat" />
-          </div>
-          <div className="text-section">
-            <h2>Welcome to our Pet Care Clinic!!</h2>
+        <div className="modal-body">
+          <img
+            src={aboutImage}
+            alt="About Us"
+            className="modal-image"
+          />
+
+          <div className="modal-text">
+            <h2>About Us</h2>
             <p>
-              We're dedicated to provide compassionate and comprehensive care
-              for your beloved pets. We offer a wide range of veterinary
-              services tailored to meet the unique needs of each furry friend.
-              From routine check-ups and vaccinations to advanced diagnostics
-              and surgery, we are committed to ensuring the health and happiness
-              of your pets. Whether you're visiting us for preventive care or
-              seeking treatment for an illness or injury, you can trust that
-              your pet will receive the highest quality care in a welcoming and
-              supportive environment.
+              Welcome to PetCare! We are dedicated to connecting loving homes with pets
+              who need them. Our mission is to make adoption seamless, transparent,
+              and joyful.
+            </p>
+            <p>
+              Whether you’re looking for a loyal companion or want to support our
+              rescue initiatives, we’re here for you. Thank you for choosing to make a
+              difference.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Styling */}
       <style>{`
-        .about-canvas {
-          background-color: white;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-          animation: slideDown 0.4s ease;
-          z-index: 10;
+        .modal-overlay {
+          position: fixed;
+          top: 0; left: 0;
+          height: 100%; width: 100%;
+          background: rgba(0,0,0,0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 2000;
         }
-
-        .canvas-content {
-          padding: 2rem;
-          max-width: 1000px;
-          margin: auto;
+        .modal-content {
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          max-width: 800px;
+          width: 90%;
           position: relative;
+          animation: fadeIn 0.3s ease;
         }
-
-        .close-btn {
+        .modal-close {
+          position: absolute;
+          top: 10px;
+          right: 15px;
           background: none;
           border: none;
-          font-size: 2rem;
-          color: #333;
-          position: absolute;
-          top: 15px;
-          right: 20px;
+          font-size: 22px;
           cursor: pointer;
         }
-
-        .content-wrapper {
+        .modal-body {
           display: flex;
-          flex-direction: row;
           align-items: center;
-          gap: 2rem;
+          gap: 20px;
           flex-wrap: wrap;
         }
-
-        .image-section img {
-          max-width: 100%;
+        .modal-image {
+          flex: 1 1 40%;
+          max-width: 300px;
+          width: 100%;
           height: auto;
-          border-radius: 10px;
-          object-fit: cover;
+          border-radius: 8px;
+        }
+        .modal-text {
+          flex: 1 1 50%;
+          text-align: left;
+          
+        }
+        .modal-text h2 {
+          margin-top: 0;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
-        .image-section {
-          flex: 1 1 300px;
-        }
-
-        .text-section {
-          flex: 2 1 400px;
-        }
-
-        .text-section h2 {
-          color: #2f4858;
-          margin-bottom: 1rem;
-        }
-
-        .text-section p {
-          font-size: 1rem;
-          color: #444;
-          line-height: 1.6;
-        }
-
-        @keyframes slideDown {
-          from {
-            transform: translateY(-20px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .content-wrapper {
+        /* For mobile screens */
+        @media (max-width: 600px) {
+          .modal-body {
             flex-direction: column;
+            align-items: center;
             text-align: center;
           }
-
-          .close-btn {
-            top: 10px;
-            right: 10px;
+          .modal-text {
+            text-align: center;
           }
         }
       `}</style>
@@ -118,4 +105,4 @@ const AboutCanvas = ({ isOpen, onClose }) => {
   );
 };
 
-export default AboutCanvas;
+export default AboutUsModal;
