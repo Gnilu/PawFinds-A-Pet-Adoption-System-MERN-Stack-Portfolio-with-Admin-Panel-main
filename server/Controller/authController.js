@@ -92,7 +92,7 @@ exports.login = async (req, res) => {
 const checkMissingFields = (body, requiredFields) =>
   requiredFields.filter((field) => !body[field]);
 
-/* Add new admin (only admins can add another admin)
+ //Add new admin (only admins can add another admin)
 exports.addAdmin = async (req, res) => {
   console.log("Request Body:", req.body);
   console.log("File:", req.file); // Log the file to verify if it's being uploaded
@@ -191,7 +191,7 @@ exports.deleteAdmin = async (req, res) => {
       error: error.message,
     });
   }
-};*/
+};
 
 // Fetch all registered users
 exports.getAllUsers = async (req, res) => {
