@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/NavBar/Navbar";
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
-import Services from "./Components/Services/Services";
+//import Services from "./Components/Services/Services";
 import Contact from "./Components/Contact/Contact";
 import Pets from "./Components/Pets/Pets";
 import AdoptForm from "./Components/AdoptForm/AdoptForm";
@@ -45,7 +45,7 @@ const App = () => {
             </Layout>
           }
         />
-        <Route
+        {/* <Route
           path="/services"
           element={
             <Layout
@@ -56,7 +56,7 @@ const App = () => {
               <Services />
             </Layout>
           }
-        />
+        /> */}
         <Route
           path="/contact"
           element={

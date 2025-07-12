@@ -8,16 +8,13 @@ import AdminDashboard from './Dashboard/AdminDashboard'
 import AdminAppointments from './Appointment'
 import AdminOrders from './AdminOrders'
 import AdminCustomers from './AdminCustomer'
-import Logo from '../../Images/Logo.png'
+
 
 const AdminScreen = () => {
   const [screen, setScreen] = useState('postingPet')
 
   return (
     <div>
-      <div className='logo'>
-        <img src={Logo} alt='logo'/>
-      </div>
     <div className='admin-screen-container'>
       <div className='admin-screen-left'>
         <div>
@@ -36,21 +33,15 @@ const AdminScreen = () => {
       <div className='admin-screen-right'>
         {screen === 'dashboard' && <AdminDashboard />}
         {screen === 'appointment' && <AdminAppointments />}
-        {screen === 'order' && <AdminOrders />}
+        {screen === 'orders' && <AdminOrders />}
         {screen === 'postingPet' && <PostingPets />}
         {/* {screen === 'approvedRequests' && <ApprovedRequests />}
         {screen === 'adoptingPet' && <AdoptingRequests />}
         {screen === 'adoptedHistory' && <AdoptedHistory />} */}
         {screen === 'treatments' && <AdminCreateArticle />}
-        {screen === 'customer' && <AdminCustomers />}
+        {screen === 'customers' && <AdminCustomers />}
       </div>
     </div>
-
-    <style>{`
-    .logo img{
-    width: 20%;
-    }
-    `}</style>
     </div>
   )
 }

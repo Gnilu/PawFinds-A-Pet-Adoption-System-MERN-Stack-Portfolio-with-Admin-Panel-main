@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Images/Logo.png";
 import cart from "./images/cart.png";
 import user from "./images/user.png";
@@ -7,6 +7,8 @@ import user from "./images/user.png";
 const Navbar = ({ onAboutClick }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false); // for mobile toggle
 
   useEffect(() => {
     const handler = (event) => {
@@ -18,6 +20,14 @@ const Navbar = ({ onAboutClick }) => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const handleServicesClick = () => {
+    navigate("/"); // Go to Home
+    setTimeout(() => {
+      const section = document.getElementById("services");
+      section?.scrollIntoView({ behavior: "smooth" });
+    }, 100); // Delay to ensure page renders before scroll
+  };
+
   return (
     <>
       <div className="navbar-container" ref={menuRef}>
@@ -27,12 +37,14 @@ const Navbar = ({ onAboutClick }) => {
           </Link>
         </div>
 
-        <ul className="navbar-links">
+        <ul className={`navbar-links ${showMenu ? "show" : ""}`}>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/services">Services</Link>
+            <button className="about-link-btn" onClick={handleServicesClick}>
+              Services
+            </button>
           </li>
           <li>
             <button onClick={onAboutClick} className="about-link-btn">
@@ -47,7 +59,7 @@ const Navbar = ({ onAboutClick }) => {
           </li>
         </ul>
 
-        <div style={{ position: "relative" }}>
+        <div className="nav-right" style={{ position: "relative" }}>
           <Link to="/cart">
             <img className="cart" src={cart} alt="cart" />
           </Link>
@@ -64,12 +76,17 @@ const Navbar = ({ onAboutClick }) => {
               <Link to="/user-account">Register</Link>
             </div>
           )}
+
+          <button className="menu-icon" onClick={() => setShowMenu(!showMenu)}>
+            ☰
+          </button>
         </div>
       </div>
 
       <style>{`
       .navbar-container {
         position: sticky;
+        width: 100%;
         top: 0;
         z-index: 100;
         background: white;
@@ -78,6 +95,7 @@ const Navbar = ({ onAboutClick }) => {
         justify-content: space-between;
         align-items: center;
         padding: 10px 30px;
+        margin-bottom: 10px;
       }
 
       .navbar-links {
@@ -87,28 +105,34 @@ const Navbar = ({ onAboutClick }) => {
         background: rgba(0, 0, 0, 0.1);
         border-radius: 50px;
         list-style: none;
+        text-decoration: none;
+        font-family: 'Oxygen', sans-serif;
+        font-weight: bold;
       }
 
-      li .about-link-btn {
+      li .about-link-btn, .about-link-btn {
         all: unset;
         cursor: pointer;
         display: inline-block;
         padding: 8px 14px;
         border-radius: 20px;
         color: #333;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         background-clip: padding-box;
         transition: background 0.3s, color 0.3s;
       }
 
       .navbar-links a {
+        display: inline-block;
         padding: 8px 14px;
         border-radius: 20px;
         transition: background 0.3s, color 0.3s;
         text-decoration: none;
         color: #333;
         font-size: 14px;
+        font-weight: bold;
+        font-family: 'Oxygen', sans-serif;
       }
 
       .navbar-links a:hover {
@@ -116,10 +140,16 @@ const Navbar = ({ onAboutClick }) => {
         color: #ff6600;
       }
 
-      li .about-link-btn:hover {
+      li .about-link-btn:hover, .about-link-btn:hover {
         background: #f0f0f0;
         color: #ff6600;
       }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+}
 
       .dropdown-menu {
         position: absolute;
@@ -150,6 +180,59 @@ const Navbar = ({ onAboutClick }) => {
         box-shadow: 0 0 2px rgba(0,0,0,0.3);
         border-radius: 20%;
       }
+
+      /* Hide menu icon on desktop */
+      .menu-icon {
+  display: none;
+  font-size: 22px;
+  background-color: white;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 36px;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.menu-icon:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.05);
+}
+
+/* Responsive styles for 760px and below */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    color: #333;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    left: 70%;
+    width: 20%;
+    background: white;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 15px;
+    display: none;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+    align: right;
+  }
+
+  .navbar-links.show {
+    display: flex;
+  }
+}
+
       `}</style>
     </>
   );
