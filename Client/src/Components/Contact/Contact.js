@@ -1,6 +1,7 @@
 import React from "react";
 import Map from './images/Map.png';
 import './Contact.css';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 const Contact = () => {
   return (
@@ -14,13 +15,13 @@ const Contact = () => {
 
         <i class="fa fa-phone"></i>
         <a class="mail-links" href="tel:+923019583959">
-          +92 301 9583959
+          +94 70 677 9667
         </a>
 
-        <p>
-        <i class="fa-solid fa-location-dot"></i>
-          Pabahinna
-        </p>
+        
+       
+        <FaMapMarkerAlt style={{ fontSize: "48px",  margin: "25px 0 10px 0" }} />
+        <p>  Pambahinna</p>
       </div>
       <div className="contactUs-pic">
         <img src={Map} alt="Location"/>

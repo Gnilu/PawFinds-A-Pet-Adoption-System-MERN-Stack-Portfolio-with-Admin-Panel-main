@@ -17,19 +17,25 @@
 
 .contactUs-left-para h3 {
     font-size: 40px;
-    color: var(--darkGrey);
+    color: #1C274C;
 }
 
 .contactUs-left-para i {
-    margin: 30px 0 20px 0;
+    margin: 30px 0 10px 0;
     font-size: 48px;
-    color: var(--darkGrey);
+    color: black;
+}
+
+.contactUs-left-para a , p{
+    margin: 20px 0 20px 0;
+    font-size: 20px;
+    color: #1C274C;
 }
 
 .contactUs-pic img {
-    height: 50vh;
+    height: 65vh;
     margin-top: 15px;
-    margin-right: 70px;
+    margin-right: 100px;
 }
 
 .contactUs-pic img:hover {
