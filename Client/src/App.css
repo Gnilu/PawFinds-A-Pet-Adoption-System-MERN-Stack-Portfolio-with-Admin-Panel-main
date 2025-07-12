@@ -11,9 +11,6 @@
     --font-color: #000000;     /* Font color: black */
 }
 
-
-
-
 .planning-container {
     padding: 10px;
     margin-top: 30px;
@@ -95,54 +92,6 @@
 
 .main-container {
     display: flex;
-}
-
-.filter-selection select {
-    font-family: "Varela Round", sans-serif;
-    font-size: 14px;
-    margin: 10px 0;
-}
-
-.filter-selection select:active {
-    border: none;
-}
-
-.filter-selection select:after {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 10px;
-    border: 1px solid var(--orange);
-    width: 310px;
-}
-
-.pet-card-pic img {
-    width: 310px;
-    height: 180px;
-    object-fit: cover;
-}
-
-.pet-card-details p {
-    font-family: "Varela Round", sans-serif;
-    color: var(--orange);
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.close-btn {
-    background-color: #f41800;
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    margin-top: 10px;
-}
-
-.close-btn i {
-    margin-left: 5px;
 }
 
 .read-more-btn:hover {
@@ -586,127 +535,10 @@ body {
     max-width: 50vw;
 }
 
-.filter-selection {
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 20px 25px;
-}
-
-.filter-selection select {
-    font-family: "Varela Round", sans-serif;
-    font-size: 14px;
-    margin: 10px 0;
-    border-radius: 100px;
-    border: none;
-    padding: 8px 8px;
-    color: var(--white);
-    background-color: var(--orange);
-}
-
-.filter-selection select:active {
-    border: none;
-}
-
-.filter-selection select:after {
-    border: none;
-}
-
-.oops-msg {
-    margin-bottom: 30px;
-}
-
 .pet-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-.pet-view-card {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 10px;
-    border: 1px solid var(--orange);
-    width: 310px;
-}
-
-.pet-card-pic {
-    max-width: 250px;
-    min-width: 250px;
-}
-
-.pet-card-pic img {
-    width: 310px;
-    height: 180px;
-    object-fit: cover;
-}
-
-.pet-card-details {
-    padding: 5px 10px;
-}
-
-.pet-card-details h2 {
-    font-family: "Varela Round", sans-serif;
-    color: var(--orange);
-    text-align: center;
-    margin: 5px 0;
-}
-
-.pet-card-details p {
-    font-family: "Varela Round", sans-serif;
-    color: var(--orange);
-}
-
-.show-interest-btn {
-    display: flex;
-    justify-content: center;
-}
-
-.show-interest-btn button {
-    font-family: "Varela Round", sans-serif;
-    font-size: 14px;
-    margin: 10px 0;
-    border-radius: 100px;
-    border: none;
-    padding: 8px 15px;
-    color: var(--white);
-    background-color: var(--orange);
-}
-
-.show-interest-btn button:hover {
-    cursor: pointer;
-    background-color: var(--hoverorange);
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.close-btn {
-    background-color: #f81900;
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.close-btn i {
-    margin-left: 5px;
 }
 
 .form-pet-container {

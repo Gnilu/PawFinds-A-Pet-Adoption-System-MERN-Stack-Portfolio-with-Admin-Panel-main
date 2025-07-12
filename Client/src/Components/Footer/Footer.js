@@ -18,8 +18,8 @@ const Footer = () => {
         <img src={Logo} alt="PetCare Logo" style={styles.logo} />
         <h3 style={styles.clinicName}>Pet Care Clinic</h3>
         <div style={{ ...styles.section, ...styles.box }}>
-          <p style={styles.contact}><FaPhone /> Phone: (123) 456-7890</p>
-          <p style={styles.contact}><FaEnvelope /> Email: petcare@gmail.com</p>
+          <p style={styles.contact}><FaPhone /> Phone: +94 70 677 9667</p>
+          <p style={styles.contact}><FaEnvelope /> Email: vspetcarepambahinna@gmail.com</p>
         </div>
       </div>
 

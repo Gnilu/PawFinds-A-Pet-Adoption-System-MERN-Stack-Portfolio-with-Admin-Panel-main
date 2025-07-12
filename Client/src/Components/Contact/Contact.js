@@ -9,12 +9,12 @@ const Contact = () => {
       <div className="contactUs-left-para">
         <h3>Let's get in touch</h3>
         <i class="fa fa-envelope"></i>
-        <a class="mail-links" href="mailto:petcare@gmail.com">
-          petcare@gmail.com
+        <a class="mail-links" href="mailto:vspetcarepambahinna@gmail.com">
+          vspetcarepambahinna@gmail.com
         </a>
 
         <i class="fa fa-phone"></i>
-        <a class="mail-links" href="tel:+923019583959">
+        <a class="mail-links" href="tel:+94706779667">
           +94 70 677 9667
         </a>
 

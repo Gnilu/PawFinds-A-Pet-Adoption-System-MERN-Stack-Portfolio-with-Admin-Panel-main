@@ -1,17 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './HomeContent.css';
 import Calender from './images/calender.png';
 import Vaccination from './images/vaccination.png';
 import MedicalKit from './images/medical-kit.png';
 import Product from './images/cart.png';
-import DogImageSitting from './images/Cat & Dog Sitteing.png';
+import DogImageSitting from './images/Cat & Dog Sitting.png';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="home-content-container">
       <div className="nav-buttons">
-        <button className="btn-treatment">Treatments</button>
-        <button className="btn-shop">Shop Products</button>
+       <button className="btn-treatment" onClick={() => navigate('/treatment')}>
+  Treatments
+</button>
+        <button className="btn-shop" onClick={() => navigate('/pets')}>
+  Shop Products
+</button>
       </div>
 
       <section className="services" id='services'>

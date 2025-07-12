@@ -29,13 +29,6 @@ const Navbar = ({ onAboutClick }) => {
     setDropdownOpen(false);
     navigate("/login");
   };
-  const handleServicesClick = () => {
-    navigate("/"); 
-    setTimeout(() => {
-      const section = document.getElementById("services");
-      section?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
 
   return (
     <>
@@ -50,11 +43,7 @@ const Navbar = ({ onAboutClick }) => {
           <li><Link to="/">Home</Link></li>
           <li>
             <Link
-              to="/"
-              onClick={(e) => {
-                e.preventDefault();
-                handleServicesClick();
-              }}
+              to="/services"
             >
               Services
             </Link>

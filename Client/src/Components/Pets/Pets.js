@@ -59,6 +59,40 @@ const Pets = () => {
           )
           )
         }
+
+         <style>{`
+      .filter-selection {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 20px 25px;
+}
+    
+      .filter-selection select {
+    font-family: "Varela Round", sans-serif;
+    font-size: 14px;
+    margin: 10px 0;
+    color: #457B9D;
+    border-color: #1C274C;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.filter-selection select:active {
+    border: none;
+}
+
+.filter-selection select:after {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px;
+    border: 1px solid #f18040;
+    width: 310px;
+}
+
+.oops-msg {
+    margin-bottom: 30px;
+}
+`}</style>
       </div>
     </>
   );
