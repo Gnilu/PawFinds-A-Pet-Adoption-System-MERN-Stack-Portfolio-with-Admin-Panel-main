@@ -28,6 +28,8 @@ const Navbar = ({ onAboutClick }) => {
     localStorage.removeItem("username");
     setDropdownOpen(false);
     navigate("/login");
+  };
+  
   const handleServicesClick = () => {
     navigate("/"); // Go to Home
     setTimeout(() => {
@@ -45,9 +47,6 @@ const Navbar = ({ onAboutClick }) => {
           </Link>
         </div>
 
-        <ul className="navbar-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/services">Services</Link></li>
         <ul className={`navbar-links ${showMenu ? "show" : ""}`}>
           <li>
             <Link to="/">Home</Link>
