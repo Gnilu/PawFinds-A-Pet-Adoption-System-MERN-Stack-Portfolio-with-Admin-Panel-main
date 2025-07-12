@@ -8,6 +8,8 @@ const Navbar = ({ onAboutClick }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+
+  const username = localStorage.getItem("username");
   const [showMenu, setShowMenu] = useState(false); // for mobile toggle
 
   useEffect(() => {
@@ -20,6 +22,12 @@ const Navbar = ({ onAboutClick }) => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    setDropdownOpen(false);
+    navigate("/login");
   const handleServicesClick = () => {
     navigate("/"); // Go to Home
     setTimeout(() => {
@@ -37,6 +45,9 @@ const Navbar = ({ onAboutClick }) => {
           </Link>
         </div>
 
+        <ul className="navbar-links">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/services">Services</Link></li>
         <ul className={`navbar-links ${showMenu ? "show" : ""}`}>
           <li>
             <Link to="/">Home</Link>
@@ -63,29 +74,54 @@ const Navbar = ({ onAboutClick }) => {
               About Us
             </Link>
           </li>
-          <li>
-            <Link to="/pets">Shop</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact Us</Link>
-          </li>
+          <li><Link to="/pets">Shop</Link></li>
+          <li><Link to="/contact">Contact Us</Link></li>
         </ul>
 
         <div className="nav-right" style={{ position: "relative" }}>
           <Link to="/cart">
             <img className="cart" src={cart} alt="cart" />
           </Link>
-          <img
-            className="user"
-            src={user}
-            alt="user"
+
+          <div
+            style={{ cursor: "pointer", display: "inline-flex", alignItems: "center" }}
             onClick={() => setDropdownOpen(!dropdownOpen)}
-          />
+          >
+            <img className="user" src={user} alt="user" />
+            {username && (
+              <span style={{ marginLeft: "8px", fontWeight: "bold", fontSize: "14px" }}>
+                Hi, {username}
+              </span>
+            )}
+          </div>
 
           {dropdownOpen && (
             <div className="dropdown-menu">
-              <Link to="/login">Login</Link>
-              <Link to="/user-account">Register</Link>
+              {username ? (
+                <>
+                  <Link to="/user-profile">Profile</Link>
+                  <button
+                    onClick={handleLogout}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "10px 16px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                      color: "#333"
+                    }}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">Login</Link>
+                  <Link to="/user-account">Register</Link>
+                </>
+              )}
             </div>
           )}
 
@@ -109,7 +145,6 @@ const Navbar = ({ onAboutClick }) => {
         padding: 10px 30px;
         margin-bottom: 10px;
       }
-
       .navbar-links {
         display: flex;
         gap: 15px;
@@ -120,6 +155,26 @@ const Navbar = ({ onAboutClick }) => {
         text-decoration: none;
         font-family: 'Oxygen', sans-serif;
         font-weight: bold;
+      }
+      li .about-link-btn {
+        all: unset;
+        cursor: pointer;
+        padding: 8px 14px;
+        border-radius: 20px;
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s, color 0.3s;
+      }
+      .navbar-links a {
+        padding: 8px 14px;
+        transition: background 0.3s, color 0.3s;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .navbar-links a:hover, li .about-link-btn:hover {
+        background: #f0f0f0;
+        color: #ff6600;
       }
 
     
@@ -156,19 +211,16 @@ const Navbar = ({ onAboutClick }) => {
         box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         z-index: 1000;
       }
-
-      .dropdown-menu a {
+      .dropdown-menu a, .dropdown-menu button {
         display: block;
         padding: 10px 16px;
         color: #333;
         text-decoration: none;
         font-size: 14px;
       }
-
-      .dropdown-menu a:hover {
+      .dropdown-menu a:hover, .dropdown-menu button:hover {
         background-color: #f5f5f5;
       }
-
       .user:hover, .cart:hover {
         transform: scale(0.8);
         transition: transform 0.2s ease;
