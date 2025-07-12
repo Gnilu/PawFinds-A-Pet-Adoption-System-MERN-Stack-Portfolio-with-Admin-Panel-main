@@ -18,6 +18,7 @@ import UserAccount from "./Components/Accounts/UserAccount";
 import UserProfilePage from "./Components/Profile/UserProfile";
 import AboutCanvas from "./Components/AboutUs/AboutUs";
 
+
 const Layout = ({ children, onAboutClick, isAboutOpen, onAboutClose }) => (
   <>
     <Navbar title="PawFinds" onAboutClick={onAboutClick} />

@@ -37,10 +37,15 @@ const Login = () => {
                 'http://localhost:5000/api/auth/login',
                 formData
             );
+            console.log("Login response:", response.data);  // debug line
+
             if (response.status === 200) {
                 alert('Login Successful!');
+
+                //  Store everything
                 localStorage.setItem('authToken', response.data.token);
                 localStorage.setItem('role', response.data.role);
+                localStorage.setItem('username', response.data.username);
 
                 if (['admin', 'super admin'].includes(response.data.role)) {
                     navigate('/dashboard');
@@ -49,7 +54,7 @@ const Login = () => {
                 }
             }
         } catch (err) {
-            console.log(err);
+            console.log("Login error:", err.response ? err.response.data : err);
             setIsModalOpen(true);
         }
     };
@@ -71,6 +76,7 @@ const Login = () => {
                     {errors.username && (
                         <div style={styles.errorText}>{errors.username}</div>
                     )}
+
                     <div style={styles.passwordWrapper}>
                         <input
                             type={showPassword ? 'text' : 'password'}
