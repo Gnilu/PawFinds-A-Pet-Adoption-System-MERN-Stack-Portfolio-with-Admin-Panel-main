@@ -29,7 +29,6 @@ const Navbar = ({ onAboutClick }) => {
     setDropdownOpen(false);
     navigate("/login");
   };
-
   const handleServicesClick = () => {
     navigate("/"); 
     setTimeout(() => {
