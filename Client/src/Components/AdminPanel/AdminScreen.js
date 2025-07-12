@@ -12,7 +12,7 @@ import AdminManagement from './AdminManagement'
 
 
 const AdminScreen = () => {
-  const [screen, setScreen] = useState('postingPet')
+  const [screen, setScreen] = useState('dashboard')
 
   return (
     <div>
