@@ -29,7 +29,7 @@ const Footer = () => {
         <p style={styles.rightText}>
           Ready to start your pet’s journey to better health?
         </p>
-       <Link to="/treatment" style={{ ...styles.btn, textDecoration: "none", display: "inline-block" }}>
+       <Link to="/appointment" style={{ ...styles.btn, textDecoration: "none", display: "inline-block" }}>
   Make an Appointment
 </Link>
 
