@@ -13,14 +13,14 @@ const HomeLandingContainer = (props) => {
         <div>
           <p className="home-title">
             <div className="home-titlePlusPng">
-            <p>Your Trusted </p><img src={homepageDog} alt="Dog sitting"/>
+            <p>Your Trusted Companion in Pet Wellness </p><img src={homepageDog} alt="Dog sitting"/>
             </div>
-            Partner in
-            <br />
-            Pet Care
+            {/* <h6>We’re More Than Just Pet Care</h6> */}
+            <h5>We’re Family for Your Furry Friends</h5>
+            
           </p>
           <p className="home-second-para">
-            {props.description}
+            At VS PetCare, we believe every pet deserves love, health, and happiness — and every pet parent deserves guidance and support. Whether you’re preparing to welcome a new four-legged friend or looking to ensure your current one gets the best care, we’re here for every step of the journey.
           </p>
         </div>
         <div className="adopt-btn">
@@ -59,7 +59,16 @@ const HomeLandingContainer = (props) => {
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
-}
+      }
+
+      .home-titlePlusPng p {
+        font-size: 22px;
+      }
+
+      .home-title h5 {
+        margin-top: 15px;
+        font-size: 50px;
+      }
 
       .home-titlePlusPng>img {
         width: 80px;
