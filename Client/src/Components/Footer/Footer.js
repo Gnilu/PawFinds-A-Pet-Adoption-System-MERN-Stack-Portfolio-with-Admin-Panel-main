@@ -93,6 +93,7 @@ const styles = {
     fontSize: "25px",
     marginBottom: "10px",
     marginTop: "50px"
+    
   },
   btn: {
     background: "#f18040",
@@ -116,6 +117,9 @@ const styles = {
     color: "#333",
     
   },
+
+  
+
 };
 
 export default Footer;

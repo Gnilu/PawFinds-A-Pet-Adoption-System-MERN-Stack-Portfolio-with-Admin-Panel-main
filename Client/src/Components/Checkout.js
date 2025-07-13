@@ -5,6 +5,7 @@ import { faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './Checkout.css';
 
+
 const Checkout = () => {
   const [selectedCartItemIds, setSelectedCartItemIds] = useState([]);
   const [cartId, setCartId] = useState(null);
