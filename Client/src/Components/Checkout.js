@@ -206,7 +206,7 @@ const Checkout = () => {
                 </tr>
               </tbody>
             </table>
-            <button onClick={() => setIsModalOpen(true)} className="summary-button">Open Order Form</button>
+            <button onClick={() => setIsModalOpen(true)} className="summary-button">Fill the Shipping Details</button>
           </div>
         </div>
 
@@ -239,7 +239,7 @@ const Checkout = () => {
               <input type="text" name="phone_number" placeholder="Phone Number" value={formData.phone_number} onChange={handleInputChange} />
               {errors.phone_number && <p className="error">{errors.phone_number}</p>}
 
-              <button onClick={handleCheckout} className="summary-button">Continue to Checkout</button>
+              <button onClick={handleCheckout} className="summary-button">Proceed to Payment</button>
             </div>
           </div>
         )}
