@@ -1,5 +1,7 @@
 const Cart = require("../Model/cart");
+const Pet = require("../Model/Pet");
 
+// Add item to cart
 exports.addItemToCart = async (req, res) => {
   const { item_id } = req.body;
   const user_id = req.user.user_id;
@@ -9,13 +11,20 @@ exports.addItemToCart = async (req, res) => {
   }
 
   try {
+    const itemExists = await Pet.findById(item_id);
+    if (!itemExists) {
+      return res.status(404).json({ message: "Item not found." });
+    }
+
     let cart = await Cart.findOne({ user_id });
 
     if (!cart) {
-      cart = new Cart({ user_id, items: [{ item_id, quantity: 1 }] });
+      cart = new Cart({
+        user_id,
+        items: [{ item_id, quantity: 1 }]
+      });
     } else {
       const itemIndex = cart.items.findIndex(item => item.item_id.toString() === item_id);
-
       if (itemIndex > -1) {
         cart.items[itemIndex].quantity += 1;
       } else {
@@ -25,12 +34,14 @@ exports.addItemToCart = async (req, res) => {
 
     await cart.save();
     res.status(200).json({ message: "Item added/updated in cart successfully." });
+
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ message: "Failed to add item", error: error.message });
   }
 };
 
+// Get cart items with populated item info
 exports.getCartItems = async (req, res) => {
   try {
     const user_id = req.user.user_id;
@@ -40,13 +51,23 @@ exports.getCartItems = async (req, res) => {
       return res.status(404).json({ message: "No items in cart." });
     }
 
-    res.status(200).json({ items: cart.items });
+    const items = cart.items.map((item) => ({
+      cart_item_id: item._id,
+      quantity: item.quantity,
+      item_id: item.item_id._id,
+      item_name: item.item_id.name,
+      item_price: item.item_id.age, // age = price
+      item_image: item.item_id.filename // use filename for serving image
+    }));
+
+    res.status(200).json({ items });
   } catch (error) {
     console.error("Error fetching cart items:", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
+// Update quantity of a specific cart item
 exports.updateCartItem = async (req, res) => {
   const cartItemId = req.params.cartItemId;
   const { quantity } = req.body;
@@ -73,6 +94,7 @@ exports.updateCartItem = async (req, res) => {
   }
 };
 
+// ✅ FIXED: Delete item from cart
 exports.deleteCartItem = async (req, res) => {
   const cartItemId = req.params.cartItemId;
   const user_id = req.user.user_id;
@@ -81,7 +103,10 @@ exports.deleteCartItem = async (req, res) => {
     const cart = await Cart.findOne({ user_id });
     if (!cart) return res.status(404).json({ message: "Cart not found." });
 
-    cart.items.id(cartItemId).remove();
+    const itemIndex = cart.items.findIndex(item => item._id.toString() === cartItemId);
+    if (itemIndex === -1) return res.status(404).json({ message: "Cart item not found." });
+
+    cart.items.splice(itemIndex, 1);
     await cart.save();
 
     res.status(200).json({ message: "Item removed from cart successfully." });

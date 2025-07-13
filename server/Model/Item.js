@@ -1,11 +1,11 @@
+// models/Item.js
 const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: String,
-  price: { type: Number, required: true },
+  name: String,
+  price: Number,
   image: String,
-  // add other fields as needed
+  // other fields if any
 });
 
-module.exports = mongoose.model("Item", itemSchema);
+module.exports = mongoose.model("Item", itemSchema); // ✅ Name must be exactly "Item"
