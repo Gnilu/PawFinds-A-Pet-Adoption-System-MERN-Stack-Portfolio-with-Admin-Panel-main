@@ -1,10 +1,10 @@
-const Cart = require("../Model/cart");
+const Cart = require("../Model/Cart");
 const Pet = require("../Model/Pet");
 
 // Add item to cart
 exports.addItemToCart = async (req, res) => {
   const { item_id } = req.body;
-  const user_id = req.user.user_id;
+  const user_id = req.user.userId; // ✅ FIXED: Match JWT payload key
 
   if (!item_id || !user_id) {
     return res.status(400).json({ message: "Item ID and User ID are required." });
@@ -44,7 +44,7 @@ exports.addItemToCart = async (req, res) => {
 // Get cart items with populated item info
 exports.getCartItems = async (req, res) => {
   try {
-    const user_id = req.user.user_id;
+    const user_id = req.user.userId; // ✅ FIXED
     const cart = await Cart.findOne({ user_id }).populate("items.item_id");
 
     if (!cart || cart.items.length === 0) {
@@ -56,8 +56,8 @@ exports.getCartItems = async (req, res) => {
       quantity: item.quantity,
       item_id: item.item_id._id,
       item_name: item.item_id.name,
-      item_price: item.item_id.age, // age = price
-      item_image: item.item_id.filename // use filename for serving image
+      item_price: item.item_id.age,           // price is stored in age
+      item_image: item.item_id.filename       // filename is used for image path
     }));
 
     res.status(200).json({ items });
@@ -71,7 +71,7 @@ exports.getCartItems = async (req, res) => {
 exports.updateCartItem = async (req, res) => {
   const cartItemId = req.params.cartItemId;
   const { quantity } = req.body;
-  const user_id = req.user.user_id;
+  const user_id = req.user.userId; // ✅ FIXED
 
   if (!cartItemId || !quantity || quantity < 1) {
     return res.status(400).json({ message: "Valid cartItemId and quantity required." });
@@ -94,10 +94,10 @@ exports.updateCartItem = async (req, res) => {
   }
 };
 
-// ✅ FIXED: Delete item from cart
+// Delete item from cart
 exports.deleteCartItem = async (req, res) => {
   const cartItemId = req.params.cartItemId;
-  const user_id = req.user.user_id;
+  const user_id = req.user.userId; // ✅ FIXED
 
   try {
     const cart = await Cart.findOne({ user_id });

@@ -40,6 +40,12 @@ const DashboardCard = ({ title, count, icon, bgColor }) => {
   font-size: 2rem;
 }
 
+@media (max-width: 600px) {
+.dashboard-card {
+ width: 90%;
+}
+}
+
       `}</style>
     </div>
   );
