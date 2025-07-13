@@ -4,11 +4,11 @@
     
 }
 
-/* * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-} */
+}
 
 :root {
     --main: #A8DADC;           /* Main color (e.g., background, sections) */
