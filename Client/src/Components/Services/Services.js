@@ -11,6 +11,22 @@ const Services = () => {
         <div className='post-pet'>
             <PostPetSection/>
         </div>
+
+        <style>{`
+        .main-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+}
+
+        .adopt-pet {
+          max-width: 50vw;
+}
+
+        .post-pet {
+          max-width: 50vw;
+}
+        `}</style>
     </div>
   )
 }

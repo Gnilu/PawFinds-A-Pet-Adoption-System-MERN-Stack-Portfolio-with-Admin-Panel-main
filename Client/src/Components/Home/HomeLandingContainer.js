@@ -108,6 +108,48 @@ const HomeLandingContainer = (props) => {
         cursor: pointer;
 }
 
+@media (max-width: 600px) {
+  .home-container {
+    flex-direction: column-reverse;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .homeContainer-left, .homeContainer-right {
+    width: 100%;
+    padding: 0;
+  }
+
+  .home-title {
+    font-size: 48px;
+  }
+
+  .home-titlePlusPng img {
+    width: 50px;
+  }
+
+  .Home-appointment-btn {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-title {
+    font-size: 36px;
+  }
+
+  .home-second-para {
+    font-size: 16px;
+  }
+
+  .Home-appointment-btn {
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
+
       `}</style>
     </div>
   );
