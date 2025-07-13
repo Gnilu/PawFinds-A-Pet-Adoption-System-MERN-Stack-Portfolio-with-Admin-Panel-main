@@ -13,6 +13,7 @@ const CartRoute = require('./Routes/cartRoutes');
 const TreatmentRoute = require('./Routes/treatmentRoutes');
 const AuthRoute = require('./Routes/authRoutes');
 const AppointmentsRoute = require('./Routes/appointmentRoutes');
+const petRoutes = require("./Routes/addPetRoutes");
 
 const app = express();
 
@@ -30,6 +31,10 @@ app.use('/api/auth', AuthRoute);
 app.use('/api/cart', CartRoute);
 app.use('/api/treatments', TreatmentRoute);
 app.use('/api', AppointmentsRoute);
+app.use("/api/pets", petRoutes);
+
+
+
 
 console.log('Connecting to MongoDB at:', process.env.MONGO_URI);
 
