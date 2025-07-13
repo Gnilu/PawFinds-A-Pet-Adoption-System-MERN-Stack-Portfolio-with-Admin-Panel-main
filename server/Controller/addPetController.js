@@ -9,7 +9,7 @@ exports.addPet = async (req, res) => {
       name,
       type,
       age,
-      breed
+      breed,
     });
 
     await pet.save();
@@ -22,7 +22,9 @@ exports.addPet = async (req, res) => {
 
 exports.getPets = async (req, res) => {
   try {
-    const pets = await Pet.find({ owner: req.user.userId }).sort({ createdAt: -1 });
+    const pets = await Pet.find({ owner: req.user.userId }).sort({
+      createdAt: -1,
+    });
     res.status(200).json({ pets });
   } catch (err) {
     console.error("Error fetching pets:", err);

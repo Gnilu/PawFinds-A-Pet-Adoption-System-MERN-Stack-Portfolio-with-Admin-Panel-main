@@ -18,6 +18,7 @@ import UserAccount from "./Components/Accounts/UserAccount";
 import UserProfilePage from "./Components/Profile/UserProfile";
 import AboutCanvas from "./Components/AboutUs/AboutUs";
 import Checkout from "./Components/Checkout";
+import TreatmentDetail from "./Components/Treatment/TreatmentDetail";
 
 
 const Layout = ({ children, onAboutClick, isAboutOpen, onAboutClose }) => (
@@ -116,6 +117,15 @@ const App = () => {
               onAboutClose={() => setAboutOpen(false)}
             >
               <TreatmentList />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/treatment/:id"
+          element={
+            <Layout onAboutClick={() => setAboutOpen(true)} isAboutOpen={aboutOpen} onAboutClose={() => setAboutOpen(false)}>
+              <TreatmentDetail />
             </Layout>
           }
         />

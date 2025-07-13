@@ -7,17 +7,16 @@ const path = require("path");
 // Multer storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images/profiles");  // make sure this folder exists
+    cb(null, "public/images/profiles"); // make sure this folder exists
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    
+
     cb(null, req.user.userId + "-" + Date.now() + ext);
   },
 });
 
 const upload = multer({ storage });
-
 
 exports.uploadMiddleware = upload.single("profileImage");
 
@@ -34,14 +33,17 @@ exports.uploadProfileImage = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json({ message: "Profile image updated", profileImage: updatedUser.profileImage });
-    
+    res
+      .status(200)
+      .json({
+        message: "Profile image updated",
+        profileImage: updatedUser.profileImage,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
 
 // Register a new user (user only)
 exports.register = async (req, res) => {
@@ -86,7 +88,9 @@ exports.login = async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required" });
+    return res
+      .status(400)
+      .json({ message: "Username and password are required" });
   }
 
   try {
@@ -167,7 +171,7 @@ exports.createAdmin = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      role: "admin"
+      role: "admin",
     });
 
     res.status(201).json({ message: "Admin created successfully" });
