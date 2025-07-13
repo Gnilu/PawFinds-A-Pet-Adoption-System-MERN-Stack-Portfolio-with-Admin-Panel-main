@@ -23,9 +23,7 @@ const Items = () => {
   const [file, setFile] = useState('');
   const [addFormdata, setAddFormData] = useState({
     item_name: '',
-    item_description: '',
     item_price: '',
-    category_name: '',
     item_image: '',
   });
   const [errors, setErrors] = useState({});
@@ -37,18 +35,8 @@ const Items = () => {
       width: '200px',
     },
     {
-      name: 'Item Description',
-      selector: (row) => row.item_description,
-      grow: 3,
-    },
-    {
       name: 'Price (Rs)',
       selector: (row) => row.item_price,
-      width: '100px',
-    },
-    {
-      name: 'Category',
-      selector: (row) => row.category_name,
       width: '100px',
     },
     {
@@ -155,9 +143,7 @@ const Items = () => {
     setSelectedItem(item);
     setEditedDetails({
       item_name: item.item_name,
-      item_description: item.item_description,
       item_price: item.item_price,
-      category_name: item.category_name,
     });
     setIsEditModalOpen(true);
   };
@@ -245,9 +231,7 @@ const Items = () => {
     const newErrors = {};
     const requiredFields = [
       'item_name',
-      'item_description',
       'item_price',
-      'category_name',
       'item_image',
     ];
     requiredFields.forEach((field) => {
@@ -281,9 +265,7 @@ const Items = () => {
       alert('Item added!');
       setAddFormData({
         item_name: '',
-        item_description: '',
         item_price: '',
-        category_name: '',
         item_image: '',
       });
       setFile('');
@@ -297,9 +279,7 @@ const Items = () => {
   const handleCancel = () => {
     setAddFormData({
       item_name: '',
-      item_description: '',
       item_price: '',
-      category_name: '',
       item_image: '',
     });
     setFile('');
@@ -310,9 +290,7 @@ const Items = () => {
     const val = e.target.value.toLowerCase();
     const filtered = filterItems.filter(
       (item) =>
-        item.item_name?.toLowerCase().includes(val) ||
-        item.category_name?.toLowerCase().includes(val)
-    );
+        item.item_name?.toLowerCase().includes(val)    );
     setItems(filtered);
   };
 
@@ -352,8 +330,8 @@ return (
 
       {/* ADD MODAL */}
       {isAddModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-box">
+        <div className="Item-modal-overlay">
+          <div className="Item-modal-box">
             <button
               className="close-button"
               onClick={() => setIsAddModalOpen(false)}
@@ -362,6 +340,7 @@ return (
             </button>
             <h3 className="modal-heading">Add New Item</h3>
             <form onSubmit={(e) => e.preventDefault()} className="modal-form">
+             
               <div className="image-input-wrapper">
                 <input
                   type="file"
@@ -382,7 +361,6 @@ return (
               {/* Form Fields */}
               {[
                 { name: 'item_name', label: 'Item Name', type: 'text' },
-                { name: 'item_description', label: 'Item Description', type: 'text' },
                 { name: 'item_price', label: 'Price (Rs)', type: 'number' },
               ].map((field) => (
                 <div key={field.name}>
@@ -398,33 +376,19 @@ return (
                 </div>
               ))}
 
-              {/* Category Dropdown */}
-              {/* <div>
-                <label>Category</label>
-                <select
-                  name="category_name"
-                  value={addFormdata.category_name}
-                  onChange={handleInputChange}
-                  className={`form-input ${errors.category_name ? 'error' : ''}`}
-                >
-                  <option value="">Select Category</option>
-                  <option value="pizza">Foods</option>
-                  <option value="cake">Cake</option>
-                  <option value="beverage">Beverage</option>
-                </select>
-                {errors.category_name && (
-                  <p className="error-text">{errors.category_name}</p>
-                )}
-              </div> */}
+             
 
               {/* Actions */}
+              <div className="form-right">
               <div className="modal-actions">
-                <button type="button" className="btn-cancel" onClick={handleCancel}>
-                  Cancel
-                </button>
                 <button type="submit" className="btn-submit" onClick={addNewItem}>
                   Submit
                 </button>
+                <button type="button" className="btn-cancel" onClick={handleCancel}>
+                  Cancel
+                </button>
+                
+              </div>
               </div>
             </form>
           </div>
@@ -442,7 +406,6 @@ return (
               className="preview-image mb-4"
             />
             <h2 className="text-xl font-bold mb-2">{selectedItem.item_name}</h2>
-            <p><strong>Description:</strong> {selectedItem.item_description}</p>
             <p><strong>Price:</strong> Rs {selectedItem.item_price}</p>
             <button className="btn-submit mt-4" onClick={() => setIsViewModalOpen(false)}>
               Close
@@ -473,9 +436,7 @@ return (
 
               {[
                 { name: 'item_name', label: 'Item Name' },
-                { name: 'item_description', label: 'Description', type: 'textarea' },
                 { name: 'item_price', label: 'Price' },
-                { name: 'category_name', label: 'Category' },
               ].map((field) => (
                 <div key={field.name}>
                   <label>{field.label}</label>
