@@ -1,4 +1,4 @@
-const Cart = require("../Model/cart");
+const Cart = require("../Model/Cart");
 const Pet = require("../Model/Pet");
 
 // Add item to cart

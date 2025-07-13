@@ -151,7 +151,7 @@ const Cart = () => {
 
     try {
       await axios.post(
-        'https://your-backend.com/api/orders/checkout/transfer-selected',
+        'http://localhost:5000/api/checkout/transfer-selected',
         {
           selectedCartItemIds: selectedItemsDetails.map((item) => item.cart_item_id),
         },

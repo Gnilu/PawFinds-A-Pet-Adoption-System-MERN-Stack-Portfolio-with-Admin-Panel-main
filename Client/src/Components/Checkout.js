@@ -24,6 +24,14 @@ const Checkout = () => {
 
   const token = localStorage.getItem('authToken');
 
+  // Helper: parse price string like "Rs.1,900.00" into number 1900.00
+  const parsePrice = (priceStr) => {
+    if (!priceStr) return 0;
+    // Remove non-numeric except dot
+    const num = Number(priceStr.replace(/[^0-9.]/g, ''));
+    return isNaN(num) ? 0 : num;
+  };
+
   useEffect(() => {
     if (token) {
       fetchSelectedItems();
@@ -35,7 +43,7 @@ const Checkout = () => {
   const fetchSelectedItems = async () => {
     try {
       const response = await axios.get(
-        'https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/orders/checkout/selected-items',
+        'http://localhost:5000/api/checkout/selected-items',
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
@@ -55,10 +63,9 @@ const Checkout = () => {
 
   const fetchOrderSummary = async (cartItemIds) => {
     try {
-      const response = await axios.get(
-        `https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/orders/order-summary?selectedCartItemIds=${encodeURIComponent(
-          JSON.stringify(cartItemIds)
-        )}`,
+      const response = await axios.post(
+        'http://localhost:5000/api/order-summary',
+        { selectedCartItemIds: cartItemIds },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
@@ -74,7 +81,7 @@ const Checkout = () => {
   const removeItem = async (cartItemId) => {
     try {
       const response = await axios.post(
-        `https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/orders/checkout/remove-items-from-checkout/${cartItemId}`,
+        `http://localhost:5000/api/checkout/remove-items-from-checkout/${cartItemId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -111,7 +118,7 @@ const Checkout = () => {
 
     try {
       const response = await axios.post(
-        'https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/orders/place',
+        'http://localhost:5000/api/orders/place',
         {
           ...formData,
           selectedCartItemIds,
@@ -125,6 +132,7 @@ const Checkout = () => {
       if (response.status === 200) {
         alert('Order placed successfully!');
         setIsModalOpen(false);
+        fetchSelectedItems(); // refresh items after order
       }
     } catch (error) {
       setCheckoutError('Checkout failed.');
@@ -156,11 +164,15 @@ const Checkout = () => {
                 {items.map((item) => (
                   <tr key={item.cart_item_id}>
                     <td>
-                      <img src={item.item_image} alt={item.item_name} className="item-image" />
+                      <img
+                        src={`http://localhost:5000/images/${item.item_image?.replace('pet-image/', '')}`}
+                        alt={item.item_name}
+                        className="item-image"
+                      />
                     </td>
                     <td>{item.item_name}</td>
                     <td>{item.quantity}</td>
-                    <td>Rs.{(item.item_price * item.quantity).toFixed(2)}</td>
+                    <td>Rs.{(parsePrice(item.item_price) * item.quantity).toFixed(2)}</td>
                     <td>
                       <button className="remove-button" onClick={() => removeItem(item.cart_item_id)}>
                         <FontAwesomeIcon icon={faTrashCan} />
