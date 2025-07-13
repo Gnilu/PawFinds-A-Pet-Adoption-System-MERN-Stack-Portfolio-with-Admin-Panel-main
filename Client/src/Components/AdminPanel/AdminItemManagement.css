@@ -1,0 +1,225 @@
+/* Root Container */
+.items-container {
+  background-color: white;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* Top Bar */
+.modal-container {
+  width: 100%;
+  margin: 3px 0 2px 3px;
+  overflow: auto;
+}
+
+.modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-right: 1rem;
+}
+
+/* Buttons */
+.add-button {
+  margin-top: 12px;
+  margin-left: 4px;
+  padding: 8px 16px;
+  color: #ff6600;
+  border: 1px solid #ff6600;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-button:hover {
+  background-color: #ff6600;
+  color: white;
+}
+
+/* Search Input */
+.search-input {
+  padding: 8px;
+  margin-top: 12px;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  background-color: white;
+  color: #1C274C;
+  border: 1px solid #ff6600;
+}
+
+/* DataTable Container */
+.data-table-wrapper {
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Box */
+.modal-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 95vw;
+  max-width: 600px;
+  position: relative;
+}
+
+.view-box {
+  max-width: 500px;
+}
+
+.modal-title,
+.modal-heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #c59d5f;
+  padding-bottom: 0.5rem;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: gray;
+}
+
+/* Form Inputs */
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input-error {
+  border-color: red;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+/* Action Buttons */
+.btn-cancel,
+.btn-submit {
+  padding: 8px 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 2px solid #ff6600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: #ff6600;
+}
+
+.btn-cancel:hover {
+  background-color: #ff6600;
+  color: white;
+}
+
+.btn-submit {
+  background-color: #ff6600;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: white;
+  color: #ff6600;
+}
+
+/* Image Upload Section */
+.image-input-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.image-upload {
+  border: 2px solid black;
+  border-radius: 8px;
+  width: 11rem;
+  height: 11rem;
+  overflow: hidden;
+}
+
+.image-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #000;
+  background-color: #f8f8f8;
+}
+
+.preview-img,
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Responsive (Optional Improvements) */
+@media (min-width: 768px) {
+  .modal-box {
+    width: 75%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-box {
+    width: 600px;
+  }
+}

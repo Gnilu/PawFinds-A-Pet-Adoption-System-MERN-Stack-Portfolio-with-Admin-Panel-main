@@ -9,34 +9,36 @@ const AdoptSection = () => {
 
   return (
     <section className="adopt-section">
-      <h2>Adopt a Pet</h2>
+      <h2>Vaccination</h2>
+      <p>Healthy Pet, Happy Life</p>
       <img src={adoptPet} alt="Happy Pet" />
 
       <p>
-        Welcome to our pet adoption program! Adopting a pet is a wonderful way
-        to bring joy and companionship into your life.
+        Welcome to our petcare clinic! Vaccinations are a vital part of keeping your pet safe from harmful diseases and ensuring a long, healthy life.
       </p>
 
-      <h3>Benefits of Pet Adoption</h3>
+      <h3>Why Vaccinations Matter</h3>
       <ul>
-        <li>Provide a loving home to a pet in need</li>
-        <li>Experience the unconditional love of a pet</li>
-        <li>Create lasting memories and cherished moments</li>
+        <li>Protect your pet from life-threatening illnesses</li>
+        <li>Prevent the spread of contagious diseases</li>
+        <li>Strengthen your pet’s immune system</li>
       </ul>
 
-      <h3>Adoption Process</h3>
+      <h3>Vaccination Services We Offer</h3>
       <ol>
-        <li>Fill out an adoption application</li>
-        <li>Meet potential pets in person</li>
-        <li>Complete the necessary paperwork</li>
+        <li>Core and Non-core vaccination</li>
+        <li>vaccination schedules</li>
+        <li>Annual boosters and wellness checkups</li>
       </ol>
 
-      <h3>Responsibilities</h3>
-      <p>
-        Adopting a pet comes with responsibilities, including feeding, grooming,
-        regular exercise, and providing medical care.
-      </p>
+      <h3>Vaccination Process</h3>
+      <ol>
+        <li>1.Schedule a Check-Up with our clinic</li>
+        <li>2.Receive a Tailored Vaccination Plan based on your pet's age, breed, and lifestyle</li>
+        <li>3.Track Booster Dates and stay up-to-date with our reminders</li>
+      </ol>
 
+      <h5> Give your pet the best protection—schedule a vaccination appointment today!</h5>
       <Link to="/pets">
         <button className="cta-button" onClick={scrollToTop}>Find Your Perfect Pet</button>
       </Link>

@@ -14,6 +14,7 @@ const TreatmentRoute = require('./Routes/treatmentRoutes');
 const AuthRoute = require('./Routes/authRoutes');
 const orderRoutes = require('./Routes/orderRoutes'); // ✅ Imported here
 const AppointmentsRoute = require('./Routes/appointmentRoutes');
+const petRoutes = require("./Routes/addPetRoutes");
 
 const app = express();
 

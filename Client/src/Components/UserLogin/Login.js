@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import FailedMsg from '../FailedMsg';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -109,6 +110,12 @@ const Login = () => {
                     </p>
                 </form>
             </div>
+            <FailedMsg
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  title="Login Failed"
+  message="Invalid username or password. Please try again."
+/>
         </section>
     );
 };

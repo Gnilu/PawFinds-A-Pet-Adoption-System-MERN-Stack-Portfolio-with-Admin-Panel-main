@@ -38,9 +38,9 @@ const DashboardChart = ({ title, data, dataKey }) => {
         margin-bottom: 1.5rem;
 }
 
-      @media (min-width: 768px) {
+      @media (min-width: 600px) {
         .dashboard-chart-container {
-        width: 48%;
+        width: 80%;
   }
 }
 

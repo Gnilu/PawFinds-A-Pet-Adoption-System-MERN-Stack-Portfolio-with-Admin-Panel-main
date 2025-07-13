@@ -54,6 +54,18 @@ const AdminDashboard = () => {
           display: flex;
           gap: 1.5rem;
         }
+
+        @media (max-width: 600px) {
+        .dashboard-cards {
+          display: flex;
+          flex-direction: column;
+      }
+
+          .dashboard-graphs {
+          display: flex;
+          flex-direction: column;
+          }
+        }
       `}</style>
     </>
   );

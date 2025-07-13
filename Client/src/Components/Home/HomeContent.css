@@ -205,3 +205,66 @@
 .news-card-below p {
   text-align: justify;
 }
+
+@media (max-width: 1024px) {
+  .news-card-left {
+    font-size: 14px;
+  }
+
+   .news-img-card img {
+    display: none;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .home-content-container {
+    padding: 1rem;
+  }
+
+  .nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    padding-left: 20%;   
+  }
+
+  .btn-treatment, 
+.btn-shop {
+  width: 200px;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+}
+
+  .testimonial-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .news-cards {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+   .news-card-left {
+    width: 100%;
+    padding: 10px;
+   }
+
+  .news-cards-right {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .news-cards-below {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .news-img-card img {
+    display: none;
+  }
+}

@@ -27,7 +27,7 @@
 }
 
 .admin-card {
-  background-color: #2d2d2d;
+  background-color: #1C274C;
   padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
@@ -91,7 +91,7 @@
 
 .admin-add-btn {
   margin-top: 1.5rem;
-  background-color: #c59d5f;
+  background-color: #fdb560;
   color: black;
   font-weight: 600;
   padding: 0.625rem 1.25rem;
@@ -102,7 +102,8 @@
 }
 
 .admin-add-btn:hover {
-  background-color: #b0894d;
+  background-color: white;
+  border: 2px solid #fdb560;
 }
 
 /* Modal Overlay */
@@ -153,7 +154,7 @@
   font-weight: bold;
   color: #1C274C;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #c59d5f;
+  border-bottom: 2px solid #fdb560;
   padding-bottom: 0.5rem;
 }
 
@@ -225,24 +226,24 @@
 }
 
 .btn-submit {
-  background-color: #c59d5f;
+  background-color: #fdb560;
   color: black;
-  border-color: #c59d5f;
+  border-color: #fdb560;
 }
 
 .btn-submit:hover {
   background-color: white;
-  color: #c59d5f;
+  color: #fdb560;
 }
 
 .btn-cancel {
   background-color: transparent;
-  color: #c59d5f;
-  border-color: #c59d5f;
+  color: #fdb560;
+  border-color: #fdb560;
 }
 
 .btn-cancel:hover {
-  background-color: #c59d5f;
+  background-color: #fdb560;
   color: black;
 }
 
