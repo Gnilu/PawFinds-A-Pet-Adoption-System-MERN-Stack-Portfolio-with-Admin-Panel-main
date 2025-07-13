@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cartItemSchema = new mongoose.Schema({
   item_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Item", // 👈 Make sure this matches exactly
+    ref: "Pet", // 👈 Make sure this matches exactly
     required: true,
   },
   quantity: {
