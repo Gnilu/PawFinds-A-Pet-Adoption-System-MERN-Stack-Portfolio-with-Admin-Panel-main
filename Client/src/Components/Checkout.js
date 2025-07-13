@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './Checkout.css';
-import { useToast } from '../ToastContext';
+import { useToast } from './ToastContext';
 
 
 const Checkout = () => {
