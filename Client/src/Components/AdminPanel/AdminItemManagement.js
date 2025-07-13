@@ -72,8 +72,8 @@ const Items = () => {
   const customStyle = {
     headRow: {
       style: {
-        backgroundColor: '#2d2d2d',
-        color: 'white',
+        backgroundColor: 'white',
+        color: 'black',
         fontSize: '16px',
         border: 'solid 1px gray',
         fontWeight: '500',
@@ -82,8 +82,8 @@ const Items = () => {
     },
     rows: {
       style: {
-        backgroundColor: '#2d2d2d',
-        color: 'white',
+        backgroundColor: 'white',
+        color: 'black',
         border: 'solid 1px gray',
         fontWeight: '200',
         letterSpacing: '0.03rem',
@@ -97,11 +97,11 @@ const Items = () => {
     },
     pagination: {
       style: {
-        backgroundColor: '#2d2d2d',
-        color: 'white',
+        backgroundColor: 'white',
+        color: 'black',
       },
       pageButtonsStyle: {
-        fill: 'white !important',
+        fill: '#ff6600 !important',
       },
     },
   };
