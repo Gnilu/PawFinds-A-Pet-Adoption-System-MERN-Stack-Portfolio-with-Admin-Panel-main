@@ -56,8 +56,8 @@ const Profile = () => {
   };
 
   const profileImageStyle = {
-    width: "150px",
-    height: "150px",
+    width: "100px",
+    height: "100px",
     objectFit: "cover",
     borderRadius: "50%",
     marginBottom: "20px",
@@ -98,7 +98,7 @@ const Profile = () => {
     backgroundColor: "#357ABD",
   };
 
-  // Simple hover effect for button - you could also use useState for hover, here is basic inline approach:
+  // Simple hover effect for button
   const [btnHover, setBtnHover] = React.useState(false);
 
   return (
@@ -106,8 +106,11 @@ const Profile = () => {
       <h2 style={{ textAlign: "center", marginBottom: "30px", color: "#4A90E2" }}>My Profile</h2>
 
       {user.profileImage ? (
-        <img src={`http://localhost:5000/profile-images/${user.profileImage}`} alt="Profile" />
-
+        <img
+          src={`http://localhost:5000/profile-images/${user.profileImage}`}
+          alt="Profile"
+          style={profileImageStyle}
+        />
       ) : (
         <div
           style={{
@@ -119,6 +122,8 @@ const Profile = () => {
             color: "#777",
             fontSize: "4rem",
             userSelect: "none",
+            width: "100px",
+            height: "100px",
           }}
         >
           ?
