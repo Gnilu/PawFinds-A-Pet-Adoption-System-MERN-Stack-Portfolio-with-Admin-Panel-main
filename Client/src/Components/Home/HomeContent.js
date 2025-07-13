@@ -52,7 +52,7 @@ const Home = () => {
           </div>
           <div className='news-cards-right'>
           <div className="news-card">
-            <h3>Pet Health Alert!</h3>
+            <h3>Pet Health alert!</h3>
             <p>Rise in Ticks and Fleas with Changing Weather Veterinarians across Sri Lanka are noticing a seasonal rise in tick and flea infestations. Make sure your pets are protected with regular treatments. Visit our clinic for tick prevention advice and the latest anti-parasitic medications.</p>
           </div>
           <div className="news-cards-below">

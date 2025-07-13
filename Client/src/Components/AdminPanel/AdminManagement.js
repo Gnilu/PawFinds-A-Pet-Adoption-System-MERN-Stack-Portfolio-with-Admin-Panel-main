@@ -3,9 +3,11 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import './AdminManagement.css';
+import { useToast } from '../ToastContext';
 
 const AdminManagement = () => {
   const [admins, setAdmins] = useState([]);
+   const { showToast } = useToast(); 
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     first_name: '',
@@ -40,11 +42,11 @@ const AdminManagement = () => {
       if (response.data && response.data.data) {
         setAdmins(response.data.data);
       } else {
-        alert('No admins found or invalid response format.');
+        showToast('No admins found or invalid response format.', "error");
       }
     } catch (error) {
       console.error('Error fetching admins:', error);
-      alert('Failed to fetch admins. Please try again.');
+      showToast('Failed to fetch admins. Please try again.', "error");
     }
   };
 
@@ -111,7 +113,7 @@ const AdminManagement = () => {
           },
         }
       );
-      alert('Admin added successfully');
+      showToast('Admin added successfully');
       setShowModal(false);
       setFormData({
         first_name: '',
@@ -128,7 +130,7 @@ const AdminManagement = () => {
       fetchAdmins();
     } catch (error) {
       console.error('Error adding admin:', error);
-      alert('Failed to add admin. Please try again.');
+      showToast('Failed to add admin. Please try again.');
     }
   };
 
@@ -143,11 +145,11 @@ const AdminManagement = () => {
             },
           }
         );
-        alert('Admin removed successfully');
+        showToast('Admin removed successfully');
         fetchAdmins();
       } catch (error) {
         console.error('Error removing admin:', error);
-        alert('Failed to remove admin. Please try again.');
+        showToast('Failed to remove admin. Please try again.');
       }
     }
   };

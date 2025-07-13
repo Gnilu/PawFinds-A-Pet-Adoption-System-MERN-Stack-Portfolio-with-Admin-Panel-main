@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useToast } from '../ToastContext';
+
 
 const Register = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast(); 
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -42,7 +45,7 @@ const Register = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      alert("Form submission failed due to validation errors");
+      showToast("Form submission failed due to validation errors");
       return;
     }
 
@@ -59,7 +62,7 @@ const Register = () => {
       );
 
       if (response.status === 201) {
-        alert("Registration successful!");
+        showToast("Registration successful!", "success");
         // Store token if backend sends one (adjust accordingly)
         if (response.data.token) {
           localStorage.setItem("authToken", response.data.token);
@@ -68,7 +71,7 @@ const Register = () => {
       }
     } catch (err) {
       console.error(err);
-      alert("Registration failed");
+      showToast("Registration failed" , "error");
     }
   };
 

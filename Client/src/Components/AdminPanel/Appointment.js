@@ -24,7 +24,7 @@ const AdminAppointments = () => {
   };
 
   const handleStatusChange = (id, newStatus) => {
-    axios.put(`http://localhost:5000/api/admin/appointments/${id}/status`, { status: newStatus })
+    axios.put(`http://localhost:5000/api/admin/appointments/${id}/status, { status: newStatus }`)
       .then(() => fetchAppointments())
       .catch(err => console.error('Status update failed:', err));
   };
@@ -51,11 +51,11 @@ const AdminAppointments = () => {
         <tbody>
           {appointments.map(appointment => (
             <tr key={appointment._id}>
-              <td>{appointment.ownerName}</td>
-              <td>{appointment.petType}</td>
-              <td>{appointment.telephone}</td>
-              <td>{appointment.date} {appointment.time}</td>
-              <td>
+              <td data-label="Owner Name">{appointment.ownerName}</td>
+              <td data-label="Pet Type">{appointment.petType}</td>
+              <td data-label="Telephone">{appointment.telephone}</td>
+              <td data-label="Date & Time">{appointment.date} {appointment.time}</td>
+              <td data-label="Status">
                 <select
                   value={appointment.status}
                   onChange={(e) => handleStatusChange(appointment._id, e.target.value)}
@@ -66,7 +66,7 @@ const AdminAppointments = () => {
                   <option value="Cancelled">Cancelled</option>
                 </select>
               </td>
-              <td className="action-buttons">
+              <td data-label="Action" className="action-buttons">
                 <button onClick={() => viewUserProfile(appointment.userId)} className="view-btn">
                   <FaEye />
                 </button>
@@ -138,6 +138,44 @@ const AdminAppointments = () => {
 .delete-btn:hover {
   color: #ef4444;
 }
+
+/* Responsive styles for screen width below 600px */
+  @media (max-width: 600px) {
+    .appointments-table thead {
+      display: none;
+    }
+      .appointments-table,
+    .appointments-table tbody,
+    .appointments-table tr,
+    .appointments-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .appointments-table tr {
+      margin-bottom: 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .appointments-table td {
+      text-align: right;
+      position: relative;
+      padding-left: 50%;
+    }
+
+    .appointments-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      font-weight: bold;
+      color: #475569;
+      text-align: left;
+    }
+  }
 
       `}</style>
     </div>

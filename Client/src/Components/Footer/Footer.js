@@ -2,6 +2,8 @@ import React from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import Logo from "../../Images/Logo.png";
 import Footer_bg from "../../Images/Footer_img.jpeg"; 
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   return (
@@ -27,7 +29,10 @@ const Footer = () => {
         <p style={styles.rightText}>
           Ready to start your pet’s journey to better health?
         </p>
-        <button style={styles.btn}>Make an Appointment</button>
+       <Link to="/appointment" style={{ ...styles.btn, textDecoration: "none", display: "inline-block" }}>
+  Make an Appointment
+</Link>
+
       </div>
 
       <div style={styles.bottom}>
