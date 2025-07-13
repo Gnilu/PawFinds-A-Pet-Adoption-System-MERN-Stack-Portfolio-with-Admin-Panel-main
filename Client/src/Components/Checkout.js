@@ -207,7 +207,7 @@ const Checkout = () => {
                 </tr>
               </tbody>
             </table>
-            <button onClick={() => setIsModalOpen(true)} className="summary-button">Fill the Shipping Details</button>
+            <button onClick={() => setIsModalOpen(true)} className="summary-button">Add Shipping Details</button>
           </div>
         </div>
 
