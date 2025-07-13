@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PostingPets from './PostingPets'
+//import PostingPets from './PostingPets'
 // import AdoptingRequests from './AdoptingRequests'
 // import AdoptedHistory from './AdoptedHistory'
 // import ApprovedRequests from './ApprovedRequests'
@@ -9,6 +9,7 @@ import AdminAppointments from './Appointment'
 import AdminOrders from './AdminOrders'
 import AdminCustomers from './AdminCustomer'
 import AdminManagement from './AdminManagement'
+import Items from './AdminItemManagement'
 
 
 const AdminScreen = () => {
@@ -22,7 +23,7 @@ const AdminScreen = () => {
           <p onClick={() => setScreen('dashboard')}>Dashboard</p>
           <p onClick={() => setScreen('appointment')}>Appointments</p>
           <p onClick={() => setScreen('orders')}>Orders Reservation</p>
-          <p onClick={() => setScreen('postingPet')}>Add Items</p>
+          <p onClick={() => setScreen('items')}>Add Items</p>
           {/* <p onClick={() => setScreen('approvedRequests')}>Approved Pets</p>
           <p onClick={() => setScreen('adoptingPet')}>Adoption Requests</p>
           <p onClick={() => setScreen('adoptedHistory')}>Adopted History</p> */}
@@ -36,7 +37,7 @@ const AdminScreen = () => {
         {screen === 'dashboard' && <AdminDashboard />}
         {screen === 'appointment' && <AdminAppointments />}
         {screen === 'orders' && <AdminOrders />}
-        {screen === 'postingPet' && <PostingPets />}
+        {screen === 'items' && <Items />}
         {/* {screen === 'approvedRequests' && <ApprovedRequests />}
         {screen === 'adoptingPet' && <AdoptingRequests />}
         {screen === 'adoptedHistory' && <AdoptedHistory />} */}
