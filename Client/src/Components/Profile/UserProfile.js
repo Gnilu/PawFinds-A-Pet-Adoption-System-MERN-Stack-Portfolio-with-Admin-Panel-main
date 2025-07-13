@@ -1,43 +1,60 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Profile = () => {
+const ProfileAndAddPet = () => {
   const [user, setUser] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [profileFile, setProfileFile] = useState(null);
+
+  // Pet fields
+  const [petName, setPetName] = useState("");
+  const [petType, setPetType] = useState("");
+  const [petAge, setPetAge] = useState("");
+  const [petBreed, setPetBreed] = useState("");
+
+  const [pets, setPets] = useState([]);
+
+  const [btnHoverProfile, setBtnHoverProfile] = useState(false);
+  const [btnHoverPet, setBtnHoverPet] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchData = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("http://localhost:5000/api/auth/me", {
-          headers: { Authorization: `Bearer ${token}` }
+
+        const userRes = await axios.get("http://localhost:5000/api/auth/me", {
+          headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data);
+        setUser(userRes.data);
+
+        const petsRes = await axios.get("http://localhost:5000/api/pets", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setPets(petsRes.data.pets || []);
       } catch (err) {
         console.error(err);
       }
     };
-    fetchUser();
+    fetchData();
   }, []);
 
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
+  const handleProfileFileChange = (e) => {
+    setProfileFile(e.target.files[0]);
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile) return alert("Please select a file first.");
+  const handleUploadProfile = async () => {
+    if (!profileFile) return alert("Please select a file first.");
     const formData = new FormData();
-    formData.append("profileImage", selectedFile);
+    formData.append("profileImage", profileFile);
 
     try {
       const token = localStorage.getItem("authToken");
       await axios.post("http://localhost:5000/api/auth/upload-profile", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      alert("Image uploaded successfully");
+      alert("Profile image uploaded successfully");
       window.location.reload();
     } catch (err) {
       console.error(err);
@@ -45,19 +62,58 @@ const Profile = () => {
     }
   };
 
+  const handleAddPet = async () => {
+    if (!petName || !petType || !petAge || !petBreed) {
+      return alert("Please fill all pet details");
+    }
+
+    try {
+      const token = localStorage.getItem("authToken");
+      const res = await axios.post(
+        "http://localhost:5000/api/pets",
+        { name: petName, type: petType, age: petAge, breed: petBreed },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      alert("Pet added successfully");
+      setPets((prev) => [...prev, res.data.pet]);
+      setPetName(""); setPetType(""); setPetAge(""); setPetBreed("");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to add pet");
+    }
+  };
+
+  // Styles
   const containerStyle = {
-    maxWidth: "400px",
-    margin: "50px auto",
-    padding: "30px",
-    borderRadius: "15px",
-    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-    backgroundColor: "#fff",
+    display: "flex",
+    maxWidth: "900px",
+    margin: "40px auto",
+    gap: "40px",
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
   };
 
+  const leftStyle = {
+    flex: 1,
+    padding: "20px",
+    borderRadius: "15px",
+    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+    backgroundColor: "#fff",
+    maxHeight: "80vh",
+    overflowY: "auto",
+  };
+
+  const rightStyle = {
+    flex: 1,
+    padding: "20px",
+    borderRadius: "15px",
+    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+    backgroundColor: "#fff",
+  };
+
   const profileImageStyle = {
-    width: "100px",
-    height: "100px",
+    width: "120px",
+    height: "120px",
     objectFit: "cover",
     borderRadius: "50%",
     marginBottom: "20px",
@@ -77,8 +133,11 @@ const Profile = () => {
     color: "#555",
   };
 
-  const fileInputStyle = {
-    marginTop: "20px",
+  const petCardStyle = {
+    border: "1px solid #ddd",
+    borderRadius: "12px",
+    padding: "10px",
+    marginBottom: "15px",
   };
 
   const buttonStyle = {
@@ -94,68 +153,117 @@ const Profile = () => {
     transition: "background-color 0.3s ease",
   };
 
-  const buttonHoverStyle = {
-    backgroundColor: "#357ABD",
-  };
-
-  // Simple hover effect for button
-  const [btnHover, setBtnHover] = React.useState(false);
+  const buttonHoverStyle = { backgroundColor: "#357ABD" };
 
   return (
     <div style={containerStyle}>
-      <h2 style={{ textAlign: "center", marginBottom: "30px", color: "#4A90E2" }}>My Profile</h2>
+      {/* Left */}
+      <div style={leftStyle}>
+        <h2 style={{ marginBottom: "20px", color: "#4A90E2" }}>My Profile</h2>
+        {user.profileImage ? (
+          <img
+            src={`http://localhost:5000/profile-images/${user.profileImage}`}
+            alt="Profile"
+            style={profileImageStyle}
+          />
+        ) : (
+          <div
+            style={{
+              ...profileImageStyle,
+              backgroundColor: "#ddd",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#777",
+              fontSize: "4rem",
+            }}
+          >
+            ?
+          </div>
+        )}
 
-      {user.profileImage ? (
-        <img
-          src={`http://localhost:5000/profile-images/${user.profileImage}`}
-          alt="Profile"
-          style={profileImageStyle}
-        />
-      ) : (
-        <div
-          style={{
-            ...profileImageStyle,
-            backgroundColor: "#ddd",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "#777",
-            fontSize: "4rem",
-            userSelect: "none",
-            width: "100px",
-            height: "100px",
-          }}
-        >
-          ?
+        <div style={infoRowStyle}>
+          <span style={labelStyle}>Username:</span> {user.username || "N/A"}
         </div>
-      )}
+        <div style={infoRowStyle}>
+          <span style={labelStyle}>Email:</span> {user.email || "N/A"}
+        </div>
+        <div style={infoRowStyle}>
+          <span style={labelStyle}>Role:</span> {user.role || "N/A"}
+        </div>
 
-      <div style={infoRowStyle}>
-        <span style={labelStyle}>Username:</span> {user.username || "N/A"}
-      </div>
-      <div style={infoRowStyle}>
-        <span style={labelStyle}>Email:</span> {user.email || "N/A"}
-      </div>
-      <div style={infoRowStyle}>
-        <span style={labelStyle}>Role:</span> {user.role || "N/A"}
+        <input
+          type="file"
+          onChange={handleProfileFileChange}
+          style={{ marginTop: "20px" }}
+          accept="image/*"
+        />
+        <button
+          onClick={handleUploadProfile}
+          style={btnHoverProfile ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle}
+          onMouseEnter={() => setBtnHoverProfile(true)}
+          onMouseLeave={() => setBtnHoverProfile(false)}
+        >
+          Save Profile Picture
+        </button>
+
+        <h3 style={{ marginTop: "30px", color: "#4A90E2" }}>My Pets</h3>
+        {pets.length === 0 && <p>No pets added yet.</p>}
+        {pets.map((pet) => (
+          <div key={pet._id} style={petCardStyle}>
+            <div><strong>Name:</strong> {pet.name}</div>
+            <div><strong>Type:</strong> {pet.type}</div>
+            <div><strong>Age:</strong> {pet.age}</div>
+            <div><strong>Breed:</strong> {pet.breed}</div>
+          </div>
+        ))}
       </div>
 
-      <input
-        type="file"
-        onChange={handleFileChange}
-        style={fileInputStyle}
-        accept="image/*"
-      />
-      <button
-        onClick={handleUpload}
-        style={btnHover ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle}
-        onMouseEnter={() => setBtnHover(true)}
-        onMouseLeave={() => setBtnHover(false)}
-      >
-        Save Profile Picture
-      </button>
+      {/* Right */}
+      <div style={rightStyle}>
+        <h2 style={{ marginBottom: "20px", color: "#4A90E2" }}>Add Pet</h2>
+
+        <input
+          type="text"
+          value={petName}
+          onChange={(e) => setPetName(e.target.value)}
+          placeholder="Pet Name"
+          style={{ width: "100%", padding: "10px", marginBottom: "12px", borderRadius: "8px", border: "1px solid #ccc" }}
+        />
+        <input
+          type="text"
+          value={petType}
+          onChange={(e) => setPetType(e.target.value)}
+          placeholder="Pet Type"
+          style={{ width: "100%", padding: "10px", marginBottom: "12px", borderRadius: "8px", border: "1px solid #ccc" }}
+        />
+        <input
+          type="number"
+          value={petAge}
+          onChange={(e) => setPetAge(e.target.value)}
+          placeholder="Pet Age"
+          min="0"
+          style={{ width: "100%", padding: "10px", marginBottom: "12px", borderRadius: "8px", border: "1px solid #ccc" }}
+        />
+        <input
+          type="text"
+          value={petBreed}
+          onChange={(e) => setPetBreed(e.target.value)}
+          placeholder="Pet Breed"
+          style={{ width: "100%", padding: "10px", marginBottom: "20px", borderRadius: "8px", border: "1px solid #ccc" }}
+        />
+
+        <button
+          onClick={handleAddPet}
+          style={btnHoverPet ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle}
+          onMouseEnter={() => setBtnHoverPet(true)}
+          onMouseLeave={() => setBtnHoverPet(false)}
+        >
+          Add Pet
+        </button>
+      </div>
     </div>
   );
 };
 
-export default Profile;
+export default ProfileAndAddPet;
