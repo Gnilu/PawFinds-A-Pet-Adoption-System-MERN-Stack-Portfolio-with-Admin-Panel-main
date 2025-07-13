@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useToast } from '../ToastContext';
 
 const AdminCreateArticle = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+   const { showToast } = useToast(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post('http://localhost:5000/api/treatments', { title, content });
-    alert('Article created!');
+    showToast('Article created!' ,"success");
     setTitle('');
     setContent('');
   };

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useToast } from '../ToastContext';
+
 
 const ProfileAndAddPet = () => {
   const [user, setUser] = useState({});
   const [profileFile, setProfileFile] = useState(null);
+  const { showToast } = useToast();
 
   // Pet fields
   const [petName, setPetName] = useState("");
@@ -42,29 +45,33 @@ const ProfileAndAddPet = () => {
   };
 
   const handleUploadProfile = async () => {
-    if (!profileFile) return alert("Please select a file first.");
+    if (!profileFile) return showToast("Please select a file first." ,"error");
     const formData = new FormData();
     formData.append("profileImage", profileFile);
 
     try {
       const token = localStorage.getItem("authToken");
-      await axios.post("http://localhost:5000/api/auth/upload-profile", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Profile image uploaded successfully");
+      await axios.post(
+        "http://localhost:5000/api/auth/upload-profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      showToast("Profile image uploaded successfully" , "success");
       window.location.reload();
     } catch (err) {
       console.error(err);
-      alert("Upload failed");
+      showToast("Upload failed", "error");
     }
   };
 
   const handleAddPet = async () => {
     if (!petName || !petType || !petAge || !petBreed) {
-      return alert("Please fill all pet details");
+      return showToast("Please fill all pet details" ,"error");
     }
 
     try {
@@ -75,12 +82,15 @@ const ProfileAndAddPet = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      alert("Pet added successfully");
+      showToast("Pet added successfully" , "success");
       setPets((prev) => [...prev, res.data.pet]);
-      setPetName(""); setPetType(""); setPetAge(""); setPetBreed("");
+      setPetName("");
+      setPetType("");
+      setPetAge("");
+      setPetBreed("");
     } catch (err) {
       console.error(err);
-      alert("Failed to add pet");
+      showToast("Failed to add pet" ,"error");
     }
   };
 
@@ -134,10 +144,41 @@ const ProfileAndAddPet = () => {
   };
 
   const petCardStyle = {
-    border: "1px solid #ddd",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "15px 20px",
     borderRadius: "12px",
-    padding: "10px",
+    background: "#fff",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.06)",
     marginBottom: "15px",
+    transition: "transform 0.2s, box-shadow 0.2s",
+  };
+
+  const petBadgeStyle = (type) => ({
+    backgroundColor:
+      type.toLowerCase() === "dog"
+        ? "#FFD700"
+        : type.toLowerCase() === "cat"
+        ? "#FF69B4"
+        : type.toLowerCase() === "bird"
+        ? "#00CED1"
+        : "#90EE90",
+    color: "#fff",
+    padding: "4px 12px",
+    borderRadius: "15px",
+    fontSize: "0.85rem",
+    fontWeight: "600",
+    textTransform: "capitalize",
+  });
+
+  const petInfoStyle = {
+    flexGrow: 1,
+    marginLeft: "15px",
+    fontSize: "0.95rem",
+    display: "grid",
+    gridTemplateColumns: "auto auto",
+    gap: "6px 14px",
   };
 
   const buttonStyle = {
@@ -200,7 +241,11 @@ const ProfileAndAddPet = () => {
         />
         <button
           onClick={handleUploadProfile}
-          style={btnHoverProfile ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle}
+          style={
+            btnHoverProfile
+              ? { ...buttonStyle, ...buttonHoverStyle }
+              : buttonStyle
+          }
           onMouseEnter={() => setBtnHoverProfile(true)}
           onMouseLeave={() => setBtnHoverProfile(false)}
         >
@@ -210,11 +255,33 @@ const ProfileAndAddPet = () => {
         <h3 style={{ marginTop: "30px", color: "#4A90E2" }}>My Pets</h3>
         {pets.length === 0 && <p>No pets added yet.</p>}
         {pets.map((pet) => (
-          <div key={pet._id} style={petCardStyle}>
-            <div><strong>Name:</strong> {pet.name}</div>
-            <div><strong>Type:</strong> {pet.type}</div>
-            <div><strong>Age:</strong> {pet.age}</div>
-            <div><strong>Breed:</strong> {pet.breed}</div>
+          <div
+            key={pet._id}
+            style={petCardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.02)";
+              e.currentTarget.style.boxShadow = "0 6px 15px rgba(0,0,0,0.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.06)";
+            }}
+          >
+            <div style={petBadgeStyle(pet.type)}>{pet.type}</div>
+            <div style={petInfoStyle}>
+              <div>
+                <strong>Name:</strong>
+              </div>
+              <div>{pet.name}</div>
+              <div>
+                <strong>Age:</strong>
+              </div>
+              <div>{pet.age}</div>
+              <div>
+                <strong>Breed:</strong>
+              </div>
+              <div>{pet.breed}</div>
+            </div>
           </div>
         ))}
       </div>
@@ -228,14 +295,26 @@ const ProfileAndAddPet = () => {
           value={petName}
           onChange={(e) => setPetName(e.target.value)}
           placeholder="Pet Name"
-          style={{ width: "100%", padding: "10px", marginBottom: "12px", borderRadius: "8px", border: "1px solid #ccc" }}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "12px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
         />
         <input
           type="text"
           value={petType}
           onChange={(e) => setPetType(e.target.value)}
           placeholder="Pet Type"
-          style={{ width: "100%", padding: "10px", marginBottom: "12px", borderRadius: "8px", border: "1px solid #ccc" }}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "12px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
         />
         <input
           type="number"
@@ -243,19 +322,33 @@ const ProfileAndAddPet = () => {
           onChange={(e) => setPetAge(e.target.value)}
           placeholder="Pet Age"
           min="0"
-          style={{ width: "100%", padding: "10px", marginBottom: "12px", borderRadius: "8px", border: "1px solid #ccc" }}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "12px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
         />
         <input
           type="text"
           value={petBreed}
           onChange={(e) => setPetBreed(e.target.value)}
           placeholder="Pet Breed"
-          style={{ width: "100%", padding: "10px", marginBottom: "20px", borderRadius: "8px", border: "1px solid #ccc" }}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "20px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
         />
 
         <button
           onClick={handleAddPet}
-          style={btnHoverPet ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle}
+          style={
+            btnHoverPet ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle
+          }
           onMouseEnter={() => setBtnHoverPet(true)}
           onMouseLeave={() => setBtnHoverPet(false)}
         >

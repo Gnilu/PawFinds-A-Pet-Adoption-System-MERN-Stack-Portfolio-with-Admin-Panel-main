@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../ToastContext';
 
 const PetsViewer = (props) => {
   const navigate = useNavigate();
-
+ const { showToast } = useToast(); 
   const handleAddToCart = async () => {
     const payload = {
-      item_id: props.pet._id  // ✅ Correct key for your backend
+      item_id: props.pet._id  
     };
 
     try {
@@ -25,11 +26,11 @@ const PetsViewer = (props) => {
       }
 
       const result = await response.json();
-      alert("Added to cart successfully!");
+      showToast("Added to cart successfully!", "success");
       navigate("/cart");
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong!");
+      showToast("Something went wrong!" , "error");
     }
   };
 
@@ -43,7 +44,7 @@ const PetsViewer = (props) => {
       </div>
       <div className='pet-card-details'>
         <h2>{props.pet.name}</h2>
-        <p><b>Price:</b> {props.pet.age}</p> {/* ✅ Showing 'age' as price */}
+        <p><b>Price:</b> {props.pet.age}</p> {/* Showing 'age' as price */}
       </div>
       <div className='show-interest-btn'>
         <button onClick={handleAddToCart}>Add To Cart <i className="fa fa-paw"></i></button>

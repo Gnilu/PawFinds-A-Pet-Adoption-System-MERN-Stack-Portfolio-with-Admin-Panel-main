@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Appointment.css";
 import Doctor from "./images/doctor.jpg";
+import { useToast } from "../ToastContext";
 
 export default function Appointment() {
+   const { showToast } = useToast(); 
   const [formData, setFormData] = useState({
     ownerName: "",
     telephone: "",
@@ -22,9 +24,9 @@ export default function Appointment() {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/api/appointments", formData);
-      alert("Appointment submitted!");
+      showToast("Appointment submitted!", "success");
     } catch (err) {
-      alert("Error submitting form");
+      showToast("Error submitting form", "error");
     }
   };
 

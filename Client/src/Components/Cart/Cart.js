@@ -4,9 +4,11 @@ import './CartPage.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useToast } from '../ToastContext';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const { showToast } = useToast(); 
   const [errorMessage, setErrorMessage] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -79,7 +81,7 @@ const Cart = () => {
   const changeQuantity = async (cartItemId, change) => {
     const token = localStorage.getItem('authToken');
     if (!token) {
-      alert('You need to log in to change item quantities.');
+      showToast('You need to log in to change item quantities.', "error");
       return;
     }
 
@@ -109,14 +111,14 @@ const Cart = () => {
       );
     } catch (error) {
       console.error('Error updating item quantity:', error);
-      alert('Error updating item quantity. Please try again.');
+      showToast('Error updating item quantity. Please try again.',"error");
     }
   };
 
   const removeItem = async (cartItemId) => {
     const token = localStorage.getItem('authToken');
     if (!token) {
-      alert('You need to log in to remove items from the cart.');
+      showToast('You need to log in to remove items from the cart.', "error");
       return;
     }
 
@@ -129,7 +131,7 @@ const Cart = () => {
       fetchCartItems();
     } catch (error) {
       console.error('Error deleting cart item:', error);
-      alert('Error deleting item. Please try again.');
+      showToast('Error deleting item. Please try again.', "error");
     }
   };
 
@@ -140,12 +142,12 @@ const Cart = () => {
     const token = localStorage.getItem('authToken');
 
     if (!token) {
-      alert('You need to log in to proceed to checkout.');
+      showToast('You need to log in to proceed to checkout.', "error");
       return;
     }
 
     if (!selectedItemsDetails.length) {
-      alert('Please select items to proceed to checkout.');
+      showToast('Please select items to proceed to checkout.', "error");
       return;
     }
 
@@ -162,11 +164,11 @@ const Cart = () => {
           },
         }
       );
-      alert('Items transferred to checkout successfully!');
+      showToast('Items transferred to checkout successfully!', "success");
       navigate('/checkout');
     } catch (error) {
       console.error('Error transferring items to checkout:', error);
-      alert('An error occurred while transferring items. Please try again.');
+      showToast('An error occurred while transferring items. Please try again.', "error");
     }
   };
 

@@ -10,9 +10,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import DataTable from 'react-data-table-component';
 import './AdminItemManagement.css'; // Custom styling
+import { useToast } from '../ToastContext';
 
 const Items = () => {
   const [items, setItems] = useState([]);
+   const { showToast } = useToast(); 
   const [filterItems, setFilterItems] = useState([]);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -147,7 +149,7 @@ const Items = () => {
       setIsViewModalOpen(true);
     } catch (err) {
       console.error(err);
-      alert('Failed to load item');
+      showToast('Failed to load item' , "error");
     }
   };
 
@@ -202,12 +204,12 @@ const Items = () => {
           },
         }
       );
-      alert('Updated successfully!');
+      showToast('Updated successfully!' , "success");
       setIsEditModalOpen(false);
       fetchItems();
     } catch (err) {
       console.error(err);
-      alert('Update failed.');
+      showToast('Update failed.', "error");
     }
   };
 
@@ -221,11 +223,11 @@ const Items = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        alert('Deleted successfully!');
+        showToast('Deleted successfully!', "success");
         setItems(items.filter((i) => i.item_id !== id));
       } catch (err) {
         console.error(err);
-        alert('Delete failed.');
+        showToast('Delete failed.', "error");
       }
     }
   };
@@ -278,7 +280,7 @@ const Items = () => {
           },
         }
       );
-      alert('Item added!');
+      showToast('Item added!', "success");
       setAddFormData({
         item_name: '',
         item_description: '',
