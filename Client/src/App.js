@@ -17,6 +17,7 @@ import Login from "./Components/UserLogin/Login";
 import UserAccount from "./Components/Accounts/UserAccount";
 import UserProfilePage from "./Components/Profile/UserProfile";
 import AboutCanvas from "./Components/AboutUs/AboutUs";
+import Checkout from "./Components/Checkout";
 
 
 const Layout = ({ children, onAboutClick, isAboutOpen, onAboutClose }) => (
@@ -127,6 +128,18 @@ const App = () => {
               onAboutClose={() => setAboutOpen(false)}
             >
               <CartPage />
+            </Layout>
+          }
+        />
+         <Route
+          path="/checkout"
+          element={
+            <Layout
+              onAboutClick={() => setAboutOpen(true)}
+              isAboutOpen={aboutOpen}
+              onAboutClose={() => setAboutOpen(false)}
+            >
+              <Checkout />
             </Layout>
           }
         />

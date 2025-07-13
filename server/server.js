@@ -12,6 +12,7 @@ const AdminRoute = require('./Routes/AdminRoute');
 const CartRoute = require('./Routes/cartRoutes');
 const TreatmentRoute = require('./Routes/treatmentRoutes');
 const AuthRoute = require('./Routes/authRoutes');
+const orderRoutes = require('./Routes/orderRoutes');
 const AppointmentsRoute = require('./Routes/appointmentRoutes');
 
 const app = express();
