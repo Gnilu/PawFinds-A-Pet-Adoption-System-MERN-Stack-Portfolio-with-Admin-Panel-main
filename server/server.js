@@ -15,6 +15,7 @@ const AuthRoute = require('./Routes/authRoutes');
 const orderRoutes = require('./Routes/orderRoutes'); // ✅ Imported here
 const AppointmentsRoute = require('./Routes/appointmentRoutes');
 const petRoutes = require("./Routes/addPetRoutes");
+const itemRoutes = require("./Routes/item-routes");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // Static routes for images
 app.use('/images', express.static(path.join(__dirname, 'public/images/pet-image')));
 app.use('/profile-images', express.static(path.join(__dirname, 'public/images/profiles')));
+app.use('/images/items', express.static(path.join(__dirname, 'public/images/items')));
 
 // ✅ Mount routes
 app.use(petRouter);
@@ -35,6 +37,7 @@ app.use('/api/cart', CartRoute);
 app.use('/api/treatments', TreatmentRoute);
 app.use('/api', AppointmentsRoute);
 app.use('/api', orderRoutes); // ✅ ADD THIS LINE to make /api/checkout/* routes work
+app.use('/api/items', itemRoutes);
 
 console.log('Connecting to MongoDB at:', process.env.MONGO_URI);
 

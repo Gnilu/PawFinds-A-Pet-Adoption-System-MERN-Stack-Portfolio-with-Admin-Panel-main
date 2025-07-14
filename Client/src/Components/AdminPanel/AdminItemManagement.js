@@ -9,12 +9,12 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import DataTable from 'react-data-table-component';
-import './AdminItemManagement.css'; // Custom styling
+import './AdminItemManagement.css';
 import { useToast } from '../ToastContext';
 
 const Items = () => {
   const [items, setItems] = useState([]);
-   const { showToast } = useToast(); 
+  const { showToast } = useToast();
   const [filterItems, setFilterItems] = useState([]);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -24,28 +24,28 @@ const Items = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [file, setFile] = useState('');
   const [addFormdata, setAddFormData] = useState({
-    item_name: '',
-    item_price: '',
-    item_image: '',
+    name: '',
+    price: '',
+    image: '',
   });
   const [errors, setErrors] = useState({});
 
   const columns = [
     {
       name: 'Item Name',
-      selector: (row) => row.item_name,
+      selector: (row) => row.name,
       width: '200px',
     },
     {
       name: 'Price (Rs)',
-      selector: (row) => row.item_price,
+      selector: (row) => row.price,
       width: '100px',
     },
     {
       name: 'Item Image',
       selector: (row) => (
         <div className="image-cell">
-          <img src={row.item_image} alt={row.item_name} className="item-img" />
+           <img src={`http://localhost:5000/images/items/${row.image}`} alt={row.name} className="item-img" />
         </div>
       ),
       width: '100px',
@@ -54,13 +54,13 @@ const Items = () => {
       name: 'Action',
       cell: (row) => (
         <div className="action-cell">
-          <button onClick={() => toggleModal(row.item_id)}>
+          <button onClick={() => toggleModal(row._id)}>
             <FontAwesomeIcon icon={faEye} />
           </button>
           <button onClick={() => toggleEditModal(row)}>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>
-          <button onClick={() => handleDelete(row.item_id)}>
+          <button onClick={() => handleDelete(row._id)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
@@ -109,12 +109,9 @@ const Items = () => {
   const fetchItems = async () => {
     const token = localStorage.getItem('authToken');
     try {
-      const response = await axios.get(
-        'https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/items',
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get('http://localhost:5000/api/items', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setItems(response.data);
       setFilterItems(response.data);
     } catch (err) {
@@ -129,23 +126,22 @@ const Items = () => {
   const toggleModal = async (id) => {
     const token = localStorage.getItem('authToken');
     try {
-      const res = await axios.get(
-        `https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/items/${id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await axios.get(`http://localhost:5000/api/items/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setSelectedItem(res.data);
       setIsViewModalOpen(true);
     } catch (err) {
       console.error(err);
-      showToast('Failed to load item' , "error");
+      showToast('Failed to load item', 'error');
     }
   };
 
   const toggleEditModal = (item) => {
     setSelectedItem(item);
     setEditedDetails({
-      item_name: item.item_name,
-      item_price: item.item_price,
+      name: item.name,
+      price: item.price,
     });
     setIsEditModalOpen(true);
   };
@@ -155,33 +151,22 @@ const Items = () => {
     setEditedDetails({ ...editedDetails, [name]: value });
   };
 
-   const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setEditedDetails((prevDetails) => ({
-        ...prevDetails,
-        item_image: reader.result,
-      }));
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+  };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('authToken');
     const formData = new FormData();
-    Object.entries(editedDetails).forEach(([key, val]) =>
-      formData.append(key, val)
-    );
-    if (selectedFile) formData.append('item_image', selectedFile);
+    formData.append('name', editedDetails.name);
+    formData.append('price', editedDetails.price);
+    if (selectedFile) formData.append('image', selectedFile);
 
     try {
       await axios.put(
-        `https://food-delivery-system-for-gather-and-grab.vercel.app/api/items/${selectedItem.item_id}`,
+        `http://localhost:5000/api/items/${selectedItem._id}`,
         formData,
         {
           headers: {
@@ -190,12 +175,12 @@ const Items = () => {
           },
         }
       );
-      showToast('Updated successfully!' , "success");
+      showToast('Updated successfully!', 'success');
       setIsEditModalOpen(false);
       fetchItems();
     } catch (err) {
       console.error(err);
-      showToast('Update failed.', "error");
+      showToast('Update failed.', 'error');
     }
   };
 
@@ -203,17 +188,14 @@ const Items = () => {
     const token = localStorage.getItem('authToken');
     if (window.confirm('Are you sure?')) {
       try {
-        await axios.delete(
-          `https://food-delivery-system-for-gather-and-grab-kzp59bwbm.vercel.app/api/items/${id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        showToast('Deleted successfully!', "success");
-        setItems(items.filter((i) => i.item_id !== id));
+        await axios.delete(`http://localhost:5000/api/items/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        showToast('Deleted successfully!', 'success');
+        setItems(items.filter((i) => i._id !== id));
       } catch (err) {
         console.error(err);
-        showToast('Delete failed.', "error");
+        showToast('Delete failed.', 'error');
       }
     }
   };
@@ -221,7 +203,7 @@ const Items = () => {
   const handleFiles = (e) => {
     const selected = e.target.files[0];
     setFile(URL.createObjectURL(selected));
-    setAddFormData({ ...addFormdata, item_image: selected });
+    setAddFormData({ ...addFormdata, image: selected });
   };
 
   const handleInputChange = (e) => {
@@ -231,14 +213,9 @@ const Items = () => {
 
   const validateAddForm = () => {
     const newErrors = {};
-    const requiredFields = [
-      'item_name',
-      'item_price',
-      'item_image',
-    ];
-    requiredFields.forEach((field) => {
+    ['name', 'price', 'image'].forEach((field) => {
       if (!addFormdata[field]) {
-        newErrors[field] = `${field.replace('_', ' ')} is required`;
+        newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
       }
     });
     setErrors(newErrors);
@@ -249,27 +226,19 @@ const Items = () => {
     if (!validateAddForm()) return;
     const token = localStorage.getItem('authToken');
     const formData = new FormData();
-    Object.entries(addFormdata).forEach(([key, val]) =>
-      formData.append(key, val)
-    );
+    formData.append('name', addFormdata.name);
+    formData.append('price', addFormdata.price);
+    formData.append('image', addFormdata.image);
 
     try {
-      await axios.post(
-        'https://food-delivery-system-for-gather-and-grab.vercel.app/api/items/add-new-item',
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-      showToast('Item added!', "success");
-      setAddFormData({
-        item_name: '',
-        item_price: '',
-        item_image: '',
+      await axios.post('http://localhost:5000/api/items/add', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       });
+      showToast('Item added!', 'success');
+      setAddFormData({ name: '', price: '', image: '' });
       setFile('');
       setIsAddModalOpen(false);
       fetchItems();
@@ -279,24 +248,20 @@ const Items = () => {
   };
 
   const handleCancel = () => {
-    setAddFormData({
-      item_name: '',
-      item_price: '',
-      item_image: '',
-    });
+    setAddFormData({ name: '', price: '', image: '' });
     setFile('');
     setIsAddModalOpen(false);
   };
 
   const handleFilter = (e) => {
     const val = e.target.value.toLowerCase();
-    const filtered = filterItems.filter(
-      (item) =>
-        item.item_name?.toLowerCase().includes(val)    );
+    const filtered = filterItems.filter((item) =>
+      item.name?.toLowerCase().includes(val)
+    );
     setItems(filtered);
   };
 
-return (
+  return (
     <div className="items-container">
       <div className="modal-container">
         <div className="modal-top">
@@ -342,7 +307,6 @@ return (
             </button>
             <h3 className="modal-heading">Add New Item</h3>
             <form onSubmit={(e) => e.preventDefault()} className="modal-form">
-             
               <div className="image-input-wrapper">
                 <input
                   type="file"
@@ -362,8 +326,8 @@ return (
 
               {/* Form Fields */}
               {[
-                { name: 'item_name', label: 'Item Name', type: 'text' },
-                { name: 'item_price', label: 'Price (Rs)', type: 'number' },
+                { name: 'name', label: 'Item Name', type: 'text' },
+                { name: 'price', label: 'Price (Rs)', type: 'number' },
               ].map((field) => (
                 <div key={field.name}>
                   <label>{field.label}</label>
@@ -374,23 +338,21 @@ return (
                     onChange={handleInputChange}
                     className={`form-input ${errors[field.name] ? 'error' : ''}`}
                   />
-                  {errors[field.name] && <p className="error-text">{errors[field.name]}</p>}
+                  {errors[field.name] && (
+                    <p className="error-text">{errors[field.name]}</p>
+                  )}
                 </div>
               ))}
 
-             
-
-              {/* Actions */}
               <div className="form-right">
-              <div className="modal-actions">
-                <button type="submit" className="btn-submit" onClick={addNewItem}>
-                  Submit
-                </button>
-                <button type="button" className="btn-cancel" onClick={handleCancel}>
-                  Cancel
-                </button>
-                
-              </div>
+                <div className="modal-actions">
+                  <button type="submit" className="btn-submit" onClick={addNewItem}>
+                    Submit
+                  </button>
+                  <button type="button" className="btn-cancel" onClick={handleCancel}>
+                    Cancel
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -403,12 +365,14 @@ return (
           <div className="modal-box view-box">
             <h3 className="modal-heading">Item Details</h3>
             <img
-              src={selectedItem.item_image}
-              alt={selectedItem.item_name}
+              src={selectedItem.image}
+              alt={selectedItem.name}
               className="preview-image mb-4"
             />
-            <h2 className="text-xl font-bold mb-2">{selectedItem.item_name}</h2>
-            <p><strong>Price:</strong> Rs {selectedItem.item_price}</p>
+            <h2 className="text-xl font-bold mb-2">{selectedItem.name}</h2>
+            <p>
+              <strong>Price:</strong> Rs {selectedItem.price}
+            </p>
             <button className="btn-submit mt-4" onClick={() => setIsViewModalOpen(false)}>
               Close
             </button>
@@ -420,10 +384,7 @@ return (
       {isEditModalOpen && selectedItem && (
         <div className="modal-overlay">
           <div className="modal-box">
-            <button
-              className="close-button"
-              onClick={() => setIsEditModalOpen(false)}
-            >
+            <button className="close-button" onClick={() => setIsEditModalOpen(false)}>
               <FontAwesomeIcon icon={faXmark} />
             </button>
             <h3 className="modal-heading">Edit Item</h3>
@@ -431,42 +392,29 @@ return (
               <div>
                 <label>Item Image</label>
                 <input type="file" accept="image/*" onChange={handleFileChange} className="form-input" />
-                {selectedItem.item_image && (
-                  <img src={selectedItem.item_image} alt="Preview" className="preview-image mt-2" />
+                {selectedItem.image && (
+                  <img src={selectedItem.image} alt="Preview" className="preview-image mt-2" />
                 )}
               </div>
 
               {[
-                { name: 'item_name', label: 'Item Name' },
-                { name: 'item_price', label: 'Price' },
+                { name: 'name', label: 'Item Name' },
+                { name: 'price', label: 'Price' },
               ].map((field) => (
                 <div key={field.name}>
                   <label>{field.label}</label>
-                  {field.type === 'textarea' ? (
-                    <textarea
-                      name={field.name}
-                      value={editedDetails[field.name]}
-                      onChange={handleEditChange}
-                      className="form-input"
-                    />
-                  ) : (
-                    <input
-                      type="text"
-                      name={field.name}
-                      value={editedDetails[field.name]}
-                      onChange={handleEditChange}
-                      className="form-input"
-                    />
-                  )}
+                  <input
+                    type="text"
+                    name={field.name}
+                    value={editedDetails[field.name]}
+                    onChange={handleEditChange}
+                    className="form-input"
+                  />
                 </div>
               ))}
 
               <div className="modal-actions">
-                <button
-                  type="button"
-                  className="btn-cancel"
-                  onClick={() => setIsEditModalOpen(false)}
-                >
+                <button type="button" className="btn-cancel" onClick={() => setIsEditModalOpen(false)}>
                   Cancel
                 </button>
                 <button type="submit" className="btn-submit">
@@ -479,7 +427,6 @@ return (
       )}
     </div>
   );
-
 };
 
 export default Items;
