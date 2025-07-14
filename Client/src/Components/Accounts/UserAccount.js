@@ -45,7 +45,7 @@ const Register = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      showToast("Form submission failed due to validation errors");
+      showToast("Form submission failed due to validation errors", "errors");
       return;
     }
 

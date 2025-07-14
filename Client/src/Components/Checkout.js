@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './Checkout.css';
+import { useToast } from './ToastContext';
 
 
 const Checkout = () => {
   const [selectedCartItemIds, setSelectedCartItemIds] = useState([]);
+  const { showToast } = useToast();
   const [cartId, setCartId] = useState(null);
   const [items, setItems] = useState([]);
   const [summary, setSummary] = useState({});
@@ -131,7 +133,7 @@ const Checkout = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
-        alert('Order placed successfully!');
+        showToast('Order placed successfully!', "success");
         setIsModalOpen(false);
         fetchSelectedItems(); // refresh items after order
       }
@@ -183,7 +185,7 @@ const Checkout = () => {
                 ))}
               </tbody>
             </table>
-          </div>
+          </div> 
 
           <div className="summary-box">
             <h3 className="order-summary-heading">Order Summary</h3>

@@ -9,14 +9,14 @@ module.exports = (req, res, next) => {
 
     // Attach the decoded user data to request using the correct key
     req.user = {
-      userId: decoded.userId, // <-- IMPORTANT: matches your JWT payload key
+      userId: decoded.userId, 
       role: decoded.role
     };
 
-    console.log("✅ Auth middleware decoded user:", req.user);
+    console.log("Auth middleware decoded user:", req.user);
     next();
   } catch (err) {
-    console.error("❌ JWT verification failed:", err.message);
+    console.error("JWT verification failed:", err.message);
     res.status(401).json({ message: 'Invalid token' });
   }
 };

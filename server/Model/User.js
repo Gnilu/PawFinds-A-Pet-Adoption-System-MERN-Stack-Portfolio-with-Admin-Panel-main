@@ -11,12 +11,12 @@ const userSchema = new mongoose.Schema(
     phone_no: String,
     address: String,
     profileImage: String,
-    user_image: String
+    user_image: String,
   },
   { timestamps: true }
 );
 
-// ✅ Add static methods
+//  Add static methods
 userSchema.statics.findByEmail = function (email) {
   return this.findOne({ email });
 };
@@ -29,7 +29,7 @@ userSchema.statics.findAllUsers = function () {
   return this.find({ role: "user" });
 };
 
-// ✅ Add missing admin helpers
+//  Add missing admin helpers
 userSchema.statics.createAdmin = function (adminData) {
   return this.create(adminData);
 };
