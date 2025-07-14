@@ -229,9 +229,7 @@ const ProfileAndAddPet = () => {
         <div style={infoRowStyle}>
           <span style={labelStyle}>Email:</span> {user.email || "N/A"}
         </div>
-        <div style={infoRowStyle}>
-          <span style={labelStyle}>Role:</span> {user.role || "N/A"}
-        </div>
+        
 
         <input
           type="file"
